@@ -3,6 +3,7 @@ class pacman{
   int mouthStep;
   boolean up;
   int count;
+  float[][] path;
   
   //Starting position
   pacman(){
@@ -12,6 +13,10 @@ class pacman{
     mouthStep = 0;
     up = false;
     count = 0;
+  }
+  
+  void writePath(){
+    
   }
   
   pacman(float x1, float y1, float radius1){

@@ -11,6 +11,14 @@ void draw(){
   pac.display();
   //pac.move(); //<>//
   maze();
+  //for(int x = 15; x < 500; x+=32){
+  //  for(int y = 10; y < 500; y+=32){
+  //    stroke(255);
+  //    line(x, y, x + 32, y);
+  //    line(x, y, x, y + 32);
+  //    stroke(0);
+  //  }
+  //}
 }
 
 void maze(){
@@ -22,34 +30,39 @@ void maze(){
 
 void mazeBoxes(){
   //BOTTOM LEFT
-  rect(135, 337.5, 35, 15);
+  rect(135, 341.25, 35, 11.25);
   
   //BOTTOM RIGHT
-  rect(320, 337.5, -35, 15);
+  rect(320, 341.25, -35, 11.25);
   
   //MIDDLE LEFT
   rect(135, 250, 15, 60);
   
   //MIDDLE RIGHT
-  rect( 320, 250, -15, 60);
+  rect(320, 250, -15, 60);
   
-  //TOP LEFT (19 long for each section)
-  rect(50, 40, 38, 30);
+  //TOP LEFT 
+  rect(50, 40, 50, 30); //needs to end at 100
   
   //TOP MIDDLE LEFT
-  rect(123, 40, 57, 30);
+  rect(135, 40, 50, 30);
   
   //TOP MIDDLE RIGHT
-  rect(265, 40, 57, 30);
+  rect(270, 40, 50, 30);
   
   //TOP RIGHT
-  rect(357, 40, 38, 30);
+  rect(355, 40, 50, 30);
   
-  //TOP MIDDLE LEFT
-  rect(50, 105, 38, 15);
+  //MIDDLE TOP LEFT
+  rect(50, 105, 50, 15);
   
-  //TOP MIDDLE RIGHT
-  rect(357, 105, 38, 15);
+  //MIDDLE TOP RIGHT
+  rect(355, 105, 50, 15);
+  
+  //Middle
+  rectMode(CORNERS);
+  rect(185, 205, 270, 252.5);  
+  rectMode(CORNER);
 }
 
 void mazeThreePiece(){
@@ -98,40 +111,44 @@ void mazeThreePiece(){
   
   //MIDDLE LEFT
   beginShape();
-  vertex(123, 105);
-  vertex(138, 105);
-  vertex(138, 155);
-  vertex(173, 155);
-  vertex(173, 170);
-  vertex(138, 170);
-  vertex(138, 215);
-  vertex(123, 215);  
-  endShape(CLOSE);
-  
-  //MIDDLE RIGHT
-  beginShape();
-  vertex(322, 105);
-  vertex(307, 105);
-  vertex(307, 155);
-  vertex(272, 155);
-  vertex(272, 170);
-  vertex(307, 170);
-  vertex(307, 215);
-  vertex(322, 215);  
+  vertex(135, 105);
+  vertex(150, 105);
+  vertex(150, 155);
+  vertex(185, 155);
+  vertex(185, 170);
+  vertex(150, 170);
+  vertex(150, 215);
+  vertex(135, 215);  
   endShape(CLOSE);
   
   //MIDDLE MIDDLE
-  //there is an extra 3.5 on each side in the path
   beginShape();
-  vertex(230, 170);
-  vertex(215, 170);
-  vertex(215, 120);
-  vertex(180, 120);
-  vertex(180, 105);
-  vertex(265, 105);
-  vertex(265, 120);
-  vertex(230, 120);  
+  vertex(185, 105);
+  vertex(185, 120);
+  vertex(220, 120);
+  vertex(220, 170);
+  vertex(235, 170);
+  vertex(235, 120);
+  vertex(270, 120);
+  vertex(270, 105);  
   endShape(CLOSE);  
+  
+  //MIDDLE RIGHT
+  beginShape();
+  vertex(270, 170);
+  vertex(270, 155);
+  vertex(305, 155);
+  vertex(305, 105);
+  vertex(320, 105);
+  vertex(320, 215);
+  vertex(305, 215);
+  vertex(305, 170);  
+  endShape(CLOSE);
+  
+  
+  
+  
+  
   fill(0);
 }
 
@@ -161,13 +178,13 @@ void mazeEdges(){
   stroke(42, 37, 227);
   
   //VERY TOP
-  line(10, 0, 445, 0); //changed
-  line(15, 5, 215, 5);
-  line(230, 5, 440, 5);
+  line(10, 0, 445, 0);
+  line(15, 5, 220, 5);
+  line(235, 5, 440, 5);
   //middle space
-  line(215, 5, 215, 55);
-  line(230, 5, 230, 55);
-  line(215, 55, 230, 55);
+  line(220, 5, 220, 70);
+  line(235, 5, 235, 70);
+  line(220, 70, 235, 70);
   
   //LEFT SIDE FROM THE TOP TO THE MIDDLE
   //down 160, 150
