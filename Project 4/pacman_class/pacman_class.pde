@@ -1,15 +1,18 @@
-pacman pac;
+pacman pac; //<>// //<>//
+ghost blinky;
 
 void setup(){
-  size(1000,500);
+  size(1000,500, P2D);
   background(0);
   pac = new pacman();
+  blinky = new ghost();
 }
 
 void draw(){
   background(0);
   pac.display();
-  //pac.move(); //<>//
+  blinky.display();
+  //pac.move();
   maze();
   //for(int x = 15; x < 500; x+=32){
   //  for(int y = 10; y < 500; y+=32){
@@ -60,9 +63,13 @@ void mazeBoxes(){
   rect(355, 105, 50, 15);
   
   //Middle
-  rectMode(CORNERS);
-  rect(185, 205, 270, 252.5);  
-  rectMode(CORNER);
+  line(185, 205, 185, 252.5);
+  line(185, 252.5, 270, 252.5);
+  line(270, 252.5, 270, 205);
+  line(270, 205, 185, 205);
+  //rectMode(CORNERS);
+  //rect(185, 205, 270, 252.5);  
+  //rectMode(CORNER);
 }
 
 void mazeThreePiece(){
@@ -188,7 +195,7 @@ void mazeEdges(){
   
   //LEFT SIDE FROM THE TOP TO THE MIDDLE
   //down 160, 150
-  line(10, 0, 10, 160); //<>//
+  line(10, 0, 10, 160);
   line(15, 5, 15, 155);
   //to right 85, 85
   line(10, 160, 95, 160);
@@ -261,3 +268,4 @@ void mazeEdges(){
   line(445, 160, 445, 0);
   
 }
+  
