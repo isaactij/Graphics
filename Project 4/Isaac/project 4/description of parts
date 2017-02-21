@@ -1,0 +1,23 @@
+pac-man (make maze) -Isaac
+  pieces: eye, mouth
+  goes over square, square disappears
+  follows the maze
+  special square so it goes faster and changes ghosts
+  goes over changed ghost, ghost dies
+  goes its own path depending on what is in hall
+
+
+squares- Dylan
+  spin
+  disappear when pac-man goes over it
+  special squares to change pac-man and ghosts
+  also needs another part
+
+
+ghosts- Anand
+  pieces: eyes
+  when goes over packman, packman dies
+  changes when pac-man eats special square
+  when changed and pac-man over it, ghost dies
+  reappears in center after dies
+  goes its own path depending on what is in hall

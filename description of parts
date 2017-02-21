@@ -10,7 +10,8 @@ pac-man (make maze) -Isaac
 squares- Dylan
   spin
   disappear when pac-man goes over it
-  special squares
+  special squares to change pac-man and ghosts
+  also needs another part
 
 
 ghosts- Anand
