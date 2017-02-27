@@ -13,6 +13,10 @@ class pellet{
       y_pos = y;
       coords.add(x_pos);
       coords.add(y_pos);
+<<<<<<< HEAD
+      
+=======
+>>>>>>> ca97fc28a542a49465d23b1dba78b9e96799f3b9
 
       
     }
@@ -227,8 +231,8 @@ class pellet{
       fill(0,0,0);
       
   
-        for(int i = 10; i < coords.size()-40; i+=2){
-           ellipse(coords.get(i)-1,coords.get(i+1)+1,18,18); 
+        for(int i = 10; i < coords.size()-50; i+=2){
+           ellipse(coords.get(i)-1,coords.get(i+1)+1,20,20); 
         }
         
       
