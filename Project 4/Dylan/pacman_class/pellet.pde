@@ -1,23 +1,29 @@
 class pellet{
   
+  int[][] coord_arr;
   int x_modifier = 0;
   int y_modifier = 0;
+  int old_x = 0;
+  int old_y = 0;
+  String keep = "";
   
   void display(int x){
     
-     if (x % 4 == 0){
+    
+    
+     if (x % 64 == 0){
         x_modifier = -1;
         y_modifier = 1;
      }
-     else if (x % 3 == 0){
+     else if (x % 32 == 0){
         x_modifier = 1;
         y_modifier = 1;
      }
-     else if(x % 2 == 0){
+     else if(x % 16 == 0){
         x_modifier = -1;
         y_modifier = -1;
      }
-     else{
+     else if(x % 8 == 0){
        x_modifier = 1;
        y_modifier = -1;
        

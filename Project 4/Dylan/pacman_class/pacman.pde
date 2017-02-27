@@ -9,7 +9,7 @@ class pacman{
   
   //Starting position
   pacman(){
-    x = 227.5;
+    x = 227.5; //<>//
     y = 370;
     radius = 10;
     mouthStep = 0;
@@ -268,7 +268,7 @@ class pacman{
   }
   
   void display(){
-   stroke(0);
+   stroke(0); //<>//
     if(mouthStep == 3){
       fill(249, 250, 23);
       arc(x, y, 20, 20, 0, 2*PI);
@@ -289,7 +289,7 @@ class pacman{
   }
   
   //step 1=left; 2=right; 3=down; 4=up
-  void move(){
+  void move(){ //<>//
     if(((x -= 0.5) == 32.5) && (y == 232.5) && lastStep == 1){
       x = 422.5;
       y = 232.5;

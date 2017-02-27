@@ -17,15 +17,16 @@ void draw(){
   gh.display();
   gh.move();
   pac.display();
-  pac.move();
+  pac.move(); //<>//
   gh.display();
   gh.move();
   maze();
-  print("(" + gh.x + ", " + gh.y + ") ");
+  print(pellet_animator+ "\n");
   if(pac.x == gh.x && pac.y == gh.y){
     pac = new pacman();
     gh = new ghost();
   }
+
   pellets.display(pellet_animator);
 }
 
