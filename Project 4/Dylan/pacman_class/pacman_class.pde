@@ -14,12 +14,7 @@ void setup(){
 void draw(){
   pellet_animator += 1;
   background(0);
-  gh.display();
-  gh.move();
-  pac.display();
-  pac.move(); //<>//
-  gh.display();
-  gh.move();
+ //<>//
   maze();
   if(pac.x == gh.x && pac.y == gh.y){
     pac = new pacman();
@@ -27,6 +22,13 @@ void draw(){
   }
   pellets.get_pac_coords(floor(pac.x()), floor(pac.y()));
   pellets.display(pellet_animator);
+  
+  gh.display();
+  gh.move();
+  pac.display();
+  pac.move();
+  gh.display();
+  gh.move();
 }
 
 void maze(){
