@@ -1,11 +1,25 @@
 class pellet{
   
-  int[][] coord_arr;
   int x_modifier = 0;
   int y_modifier = 0;
-  int old_x = 0;
-  int old_y = 0;
-  String keep = "";
+  ArrayList<Integer> coords = new ArrayList<Integer>();
+  int x_pos = 0;
+  int y_pos = 0;
+  
+  void get_pac_coords(int x, int y){
+    
+    if(x != x_pos || y != y_pos){
+      x_pos = x;
+      y_pos = y;
+      coords.add(x_pos);
+      coords.add(y_pos);
+      print(coords + "\n");
+      
+
+      
+    }
+    
+  }
   
   void display(int x){
     
@@ -211,6 +225,15 @@ class pellet{
 
        rect(422 + x_modifier, 432+y_modifier, 4, 4);
        rect(422 + x_modifier, 448+y_modifier, 4, 4);
+
+      fill(0,0,0);
+      
+  
+        for(int i = 10; i < coords.size()-40; i+=2){
+           ellipse(coords.get(i)-1,coords.get(i+1)+1,18,18); 
+        }
+        
+      
 
   }
 

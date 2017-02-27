@@ -21,12 +21,11 @@ void draw(){
   gh.display();
   gh.move();
   maze();
-  print(pellet_animator+ "\n");
   if(pac.x == gh.x && pac.y == gh.y){
     pac = new pacman();
     gh = new ghost();
   }
-
+  pellets.get_pac_coords(floor(pac.x()), floor(pac.y()));
   pellets.display(pellet_animator);
 }
 
