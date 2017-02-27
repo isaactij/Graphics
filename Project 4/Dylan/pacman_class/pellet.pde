@@ -13,7 +13,10 @@ class pellet{
       y_pos = y;
       coords.add(x_pos);
       coords.add(y_pos);
+<<<<<<< HEAD
       
+=======
+>>>>>>> ca97fc28a542a49465d23b1dba78b9e96799f3b9
 
       
     }
