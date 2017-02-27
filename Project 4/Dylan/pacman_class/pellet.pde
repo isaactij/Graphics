@@ -13,8 +13,6 @@ class pellet{
       y_pos = y;
       coords.add(x_pos);
       coords.add(y_pos);
-      print(coords + "\n");
-      
 
       
     }
