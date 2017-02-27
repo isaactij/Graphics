@@ -1,27 +1,27 @@
-pacman pac; //<>// //<>//
-ghost blinky;
+pacman pac;
+ghost gh;
 
 void setup(){
   size(1000,500, P2D);
   background(0);
   pac = new pacman();
-  blinky = new ghost();
+  gh = new ghost();
 }
 
 void draw(){
   background(0);
+  gh.display();
+  gh.move();
   pac.display();
-  blinky.display();
-  //pac.move();
+  pac.move(); //<>//
+  gh.display();
+  gh.move();
   maze();
-  //for(int x = 15; x < 500; x+=32){
-  //  for(int y = 10; y < 500; y+=32){
-  //    stroke(255);
-  //    line(x, y, x + 32, y);
-  //    line(x, y, x, y + 32);
-  //    stroke(0);
-  //  }
-  //}
+  print("(" + gh.x + ", " + gh.y + ") ");
+  if(pac.x == gh.x && pac.y == gh.y){
+    pac = new pacman();
+    gh = new ghost();
+  }
 }
 
 void maze(){
@@ -220,24 +220,24 @@ void mazeEdges(){
   //down right line 115, the exteding part is 15 wide
   //    down 77.5 and 77.5
   line(15, 310, 15, 387.5);
-  line(15, 402.5, 15, 480);
+  line(15, 402.5, 15, 487.5);
   //    to left 35
   line(15, 387.5, 50, 387.5);
   line(15, 402.5, 50, 402.5);
   line(50, 387.5, 50, 402.5);
   //down left line 125
-  line(10, 305, 10, 485);
+  line(10, 305, 10, 492.5);
   
   //VERY BOTTOM
-  line(15, 480, 440, 480);
-  line(10, 485, 445, 485);
+  line(15, 487.5, 440, 487.5);
+  line(10, 492.5, 445, 492.5);
   
   //RIGHT SIDE FROM BOTTOM TO MIDDLE
   //up right line
-  line(445, 485, 445, 305);
+  line(445, 492.5, 445, 305);
   //up left line
   //    up 77.5 and 77.5
-  line(440, 480, 440, 402.5);
+  line(440, 487.5, 440, 402.5);
   line(440, 387.5, 440, 310);
   //    to right 35
   line(440, 402.5, 405, 402.5);
@@ -268,4 +268,3 @@ void mazeEdges(){
   line(445, 160, 445, 0);
   
 }
-  
