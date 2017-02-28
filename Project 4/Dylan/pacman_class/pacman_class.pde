@@ -14,6 +14,7 @@ void setup(){
 void draw(){
   pellet_animator += 1;
   background(0);
+<<<<<<< HEAD
   pellets.get_pac_coords(floor(pac.x()), floor(pac.y()));
   pellets.display(pellet_animator);
   gh.display();
@@ -22,13 +23,28 @@ void draw(){
   pac.move(); //<>//
   gh.display();
   gh.move();
+=======
+ //<>//
+>>>>>>> 1571482b05036aeec2fde2880e8a959ec425a7e0
   maze();
   if(pac.x == gh.x && pac.y == gh.y){
     pac = new pacman();
     gh = new ghost();
     pellets = new pellet();
   }
+<<<<<<< HEAD
  
+=======
+  pellets.get_pac_coords(floor(pac.x()), floor(pac.y()));
+  pellets.display(pellet_animator);
+  
+  gh.display();
+  gh.move();
+  pac.display();
+  pac.move();
+  gh.display();
+  gh.move();
+>>>>>>> 1571482b05036aeec2fde2880e8a959ec425a7e0
 }
 
 void maze(){

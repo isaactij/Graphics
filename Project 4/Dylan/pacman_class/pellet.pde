@@ -16,6 +16,7 @@ class pellet{
       print(coords + "\n");
       
 
+
       
     }
     
@@ -229,7 +230,11 @@ class pellet{
       fill(0,0,0);
       
   
+<<<<<<< HEAD
         for(int i = 10; i < coords.size()-40; i+=2){
+=======
+        for(int i = 10; i < coords.size()-50; i+=2){
+>>>>>>> 1571482b05036aeec2fde2880e8a959ec425a7e0
            ellipse(coords.get(i)-1,coords.get(i+1)+1,20,20); 
         }
         
