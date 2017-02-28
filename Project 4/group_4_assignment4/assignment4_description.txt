@@ -1,0 +1,18 @@
+The animation is a game of Pac-Man that plays itself and is random each time.
+The four classes are group_4_assignment4, ghost_class, pacman, and pellet. The
+group_4_assignment4 is the main class that runs the program. It calls on the other
+three classes, controlls when to reset the game, and plays the sound file. The
+ghost_class was created by Anand and controls how the ghost looks, the way the
+eyes move, and the way the ghost navigates the maze. The eyes change position
+depending on which direction the ghost is going. The pacman class was created by
+Isaac and controls how the pacman looks, the way the mouth moves, and how it
+navigates the maze. The mouth opens and closes throughout gameplay. The pellet
+class was created by Dylan and controls how the pellets look, the way they move, 
+and when they disappear. The pellets move back and forth in place and when
+pacman goes over them they disappear. Even though each part was created by one
+person we all did help eachother in tough situations. Some unexpected challenges
+were getting the math correct when creating the maze so all paths were the same
+width and when creating the track pacman and the ghost follows to get it right
+in the middle of all the paths. Another challenge was getting the eyes on the
+ghosts moving correctly and in a timely manner and getting the pellets to
+disappear when pacman went over them. The animation runs infinitely.

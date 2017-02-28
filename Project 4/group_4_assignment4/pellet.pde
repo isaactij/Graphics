@@ -13,7 +13,7 @@ class pellet{
       y_pos = y;
       coords.add(x_pos);
       coords.add(y_pos);
-      print(coords + "\n");
+      //print(coords + "\n");
       
 
       
@@ -230,7 +230,7 @@ class pellet{
       
   
         for(int i = 10; i < coords.size()-40; i+=2){
-           ellipse(coords.get(i)-1,coords.get(i+1)+1,20,20); 
+           ellipse(coords.get(i)-1,coords.get(i+1)+1,25,25); 
         }
         
       

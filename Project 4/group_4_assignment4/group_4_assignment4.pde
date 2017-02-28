@@ -1,7 +1,9 @@
+import processing.sound.*; //<>//
 pacman pac;
 ghost gh;
 pellet pellets;
 int pellet_animator = 0;
+SoundFile file;
 
 void setup(){
   size(1000,500, P2D);
@@ -9,26 +11,33 @@ void setup(){
   pac = new pacman();
   gh = new ghost();
   pellets = new pellet();
+  file = new SoundFile(this, "sound.wav");
+  file.loop();
 }
 
 void draw(){
-  pellet_animator += 1;
+ pellet_animator += 1;
   background(0);
   pellets.get_pac_coords(floor(pac.x()), floor(pac.y()));
   pellets.display(pellet_animator);
   gh.display();
   gh.move();
   pac.display();
-  pac.move(); //<>//
-  gh.display();
-  gh.move();
-  maze();
-  if(pac.x == gh.x && pac.y == gh.y){
+  pac.move();
+  if(pac.x() == gh.x() && pac.y() == gh.y()){
     pac = new pacman();
     gh = new ghost();
     pellets = new pellet();
   }
- 
+  gh.display();
+  gh.move();  
+  if(pac.x() == gh.x() && pac.y() == gh.y()){
+    pac = new pacman();
+    gh = new ghost();
+    pellets = new pellet();
+  }
+  maze();
+  print("(" + pac.x + ", " + pac.y + ")  \n");
 }
 
 void maze(){
