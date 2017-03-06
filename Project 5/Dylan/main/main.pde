@@ -18,10 +18,11 @@ boolean back;
 boolean windDone;
 int onlyShake;
 int windBlowCount;
+int z;
 
 sun sun1;
-int xpos = 1000;
-double ypos = 4000, y;
+int xpos = 600;
+double ypos = 0, y;
 float turn = 0;
 float ang = 0;
 int y1 = (int) y;
@@ -74,10 +75,10 @@ void draw() {
   if (xpos > -600){ // moves the sun
     xpos -= 1;}  
   if (ypos > -600){
-    ypos = 150 * cos(ang + PI) - 150;}
+    ypos = 75 * cos(ang + PI) + 200;}
     
-  if (xpos <= -600){ // resets the sun when it reaches arbitrarily picked number
-    xpos = 350;}
+  if (xpos <= 0){ // resets the sun when it reaches arbitrarily picked number
+    xpos = 800;}
   if (ypos <= -600){
     ypos = 0;}
     

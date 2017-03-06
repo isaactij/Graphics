@@ -18,11 +18,12 @@ class sun{
     
     int y1 = (int) y;
     pushMatrix();
-    translate(x, y1);
+    translate(x, y1, -100);
     //camera(x, y, 100, 0, 0, 0, 0, 1, 0);
     //ambientLight(255, 255, 0, x, y1, z + 50);
     rotateY(turn);
-    sphere(100);
+    //noStroke();
+    sphere(50);
     popMatrix();}
   
 
