@@ -1,4 +1,7 @@
-tree a; //<>// //<>// //<>// //<>//
+tree a; //<>// //<>//
+ocean ocean1;
+boolean subtract = false;
+int t = 0;
 int count;
 int step;
 float xShiftSix;
@@ -44,13 +47,30 @@ void setup() {
   onlyShake = 0;
   windBlowCount = 0;
   sun1 = new sun();
+  ocean1 = new ocean();
 }
 
 void draw() {
-  background(255, 0); //<>//
+  if(t == 0){
+    subtract = false;
+  }
+  else if(t == 50){
+     subtract = true;   
+  }
+  
+  if(subtract){
+    t--;
+  }
+  else{
+    t++; 
+  }
+  background(255,162,87);
+  ocean1.display(t);
   ambientLight(255, day, 0, sun1.x, sun1.y, sun1.z + 50);
   stroke(10);
   sun1.display(xpos, ypos, turn);
+
+
   if (xpos > -600){ // moves the sun
     xpos -= 1;}  
   if (ypos > -600){
