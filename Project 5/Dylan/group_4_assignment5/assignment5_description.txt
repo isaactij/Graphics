@@ -1,0 +1,13 @@
+Our animation is a tree in the ocean with waves going around it and a sun
+floating in the sky. Our three classes are ocean_class, sun_class, and
+tree_class. The ocean_class was done by Dylan and it is a 3D object that moves
+up and down and side to side to imitate waves in the ocean. The challenges
+here was the initial idea was to have triangles moving toward the camera,
+but it proved a challenge to do this. The sun_class was done by Anand and it is
+a sphere that rotates and moves in the sky and changes color over time to
+represent the rise and setting of the sun. The challenge here was getting the
+sun in the camera view. The tree_class was done by Isaac and it is a palm tree
+that when the wind (represented by lines) blows some of the leaves blow to the
+side and all of the leaves shake and then the leaves go to their original
+positions. The challenge here was getting the rotation correct for the leaves
+when they move to the side and shake.
