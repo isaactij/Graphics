@@ -1,0 +1,4 @@
+birds- stay away from pred. and stay close to eachother; dies when predator goes
+over it
+predator- go after birds; stays at an average radius distance
+scavenger- stays radius away; when bird dies goes after bird
