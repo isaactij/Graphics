@@ -851,10 +851,18 @@ class bird {
 
 
   float birdX() {
-    return x1;
+    return leaderX;
   }
 
   float birdY() {
+    return leaderY;
+  }
+  
+  float bird1X(){
+    return x1;
+  }
+  
+  float bird1Y(){
     return y1;
   }
   
