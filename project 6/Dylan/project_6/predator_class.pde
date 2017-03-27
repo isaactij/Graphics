@@ -3,6 +3,7 @@ class predator{
   int birdX, birdY;
   int x, y = 0;
   float t, vel, accel;
+  int target_x, target_y;
   
   void drawPredator(){
     changePredPos();
@@ -22,10 +23,14 @@ class predator{
   }
   
   void changePredPos(){
-    if(this.t % 30 == 0){
-      this.x = this.birdX;
-      this.y = this.birdY;
+    if(this.t % 100 == 0){
+      this.target_x = birdX;
+      this.target_y = birdY;
     }
+    this.x = floor(lerp(x, target_x, 0.2));
+    this.y = floor(lerp(y, target_y, 0.2));
+
+    
     
   }
   
