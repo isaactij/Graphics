@@ -5,12 +5,31 @@ class scavenger{
   float lerpy;
   float lerpx;
   float i = .01; 
-  boolean scavenge = false;
+  boolean dead1 = false;
+  boolean dead2 = false;
+  boolean dead3 = false;
+  boolean dead4 = false;
+  boolean dead5 = false;
+  boolean dead6 = false;
+  
+  float x1;
+  float y1;
+  float x2;
+  float y2;
+  float x3;
+  float y3;
+  float x4;
+  float y4;
+  float x5;
+  float y5;
+  float x6;
+  float y6;
+  
   void setup(){
     img_vulture = loadShape("vulture.svg");}
     
   scavenger(){
-    x = 50;
+    x = 20;
     y = 50;
     sizeX = 25;
     sizeY = 25;}
@@ -19,30 +38,50 @@ class scavenger{
     if (predX < width/2){
       return (predX - dist);}
     else {
-      return (predX + dist);}}
+      return (predX + dist);}
+    }
       
   float y(float predY){
     if (predY < height/2){
       return (predY - dist);}
     else {
-      return (predY + dist);}}
+      return (predY + dist);}
+    }
     
-  void display(float predX, float predY){
+  void display(){
 
     fill(0);
     if (i < 1){
       lerpy = lerp(10, 400, i);
-      shape(img_vulture, 20, lerpy, sizeX, sizeY);
+      shape(img_vulture, x, lerpy, sizeX, sizeY);
       
       i += .001;}
     else{
       i = .1;
-      shape(img_vulture, 20, lerpy, sizeX, sizeY);
-    }
+      shape(img_vulture, x, lerpy, sizeX, sizeY);
+        }  
   }
-  void eatBird(float deadX, float deadY){
-    this.x = lerp(x, deadX, .02);
-    this.y = lerp(y, deadY, .02);}
+  
+  void eatBird (boolean dead1, boolean dead2, boolean dead3, boolean dead4, boolean dead5, boolean dead6, float x1, float x2, float x3, float x4, float x5, float x6, float y1, float y2, float y3, float y4, float y5, float y6 ){
+    if (dead1 == true){
+      this.x = lerp(x, x1, .7);
+      this.y = lerp(y, y1, .7);}
+    if (dead2 == true){
+      this.x = lerp(x, x2, .7);
+      this.y = lerp(y, y2, .7);}
+    if (dead3 == true){
+      this.x = lerp(x, x3, .7);
+      this.y = lerp(y, y3, .7);} 
+    if (dead4 == true){
+      this.x = lerp(x, x4, .7);
+      this.y = lerp(y, y4, .7);}
+    if (dead5 == true){
+      this.x = lerp(x, x5, .7);
+      this.y = lerp(y, y5, .7);}
+    if (dead6 == true){
+      this.x = lerp(x, x6, .7);
+      this.y = lerp(y, y6, .7);}
+  }
     
     
     //taken out from display()
@@ -63,5 +102,5 @@ class scavenger{
     //}
    
   
-  
+
 }

@@ -54,10 +54,17 @@ class bird {
   float leaderY;
   int eatenCountMax;
 
+  float predatorX;
+  float predatorY;  
+  int predatorCount;
+  float predatorLastX;
+  float predatorLastY;
+
+
   bird() {
     x1 = 50;
     y1 = 50;
-    x2 = 55;
+    x2 = 155;
     y2 = 50;
     x3 = 60;
     y3 = 50;
@@ -121,6 +128,9 @@ class bird {
     leader6eaten = false;
 
     eatenCountMax = 100;
+
+    predatorX = 200;
+    predatorY = 50;
   }
 
   void drawbirds() {
@@ -149,9 +159,25 @@ class bird {
       text("6", x6, y6);
       //shape(b, x6, y6);
     }
+
+    text("P", predatorX, predatorY);
   }
 
-  void movebirds() {    
+  void movebirds(float predX, float predY) {    
+    predatorY = predX;
+    predatorX = predY;
+    if (leaderX - 100 < predatorX && predatorX < leaderX + 100 && leaderY - 100 < predatorY && predatorY < leaderY +100) {
+      if (leaderX > predatorX) {
+        backx = false;
+      } else {
+        backx = true;
+      }
+      if (leaderY > predatorY) {
+        backy = false;
+      } else {
+        backy = true;
+      }
+    } 
 
     if (leaderX == 500) {
       backx = true;
@@ -165,6 +191,8 @@ class bird {
     if (leaderY == 0) {
       backy = false;
     }
+    
+    
     if (!backx) {
       leaderX++;
     } else { 
@@ -175,8 +203,9 @@ class bird {
     } else {
       leaderY--;
     }
-    //x1 = mouseX;
-    //y1= mouseY;
+
+
+
     if (!eaten1) {
       movebird1();
     }
@@ -195,29 +224,26 @@ class bird {
     if (!eaten6) {
       movebird6();
     }
-    //print("leader4x" + leader4X + "\n");
-    //print("x3" + x3 + "\n");
   }
 
   void ifDead(float sx, float sy) {
-    int scavengerWidth = 100;
-    print(sx);
-    if (dead1 && x1 + scavengerWidth > sx && sx > x1 - scavengerWidth && y1 + scavengerWidth > sx && sx > y1 - scavengerWidth) {
+    int scavengerWidth = 200;
+    if (dead1 && x1 + scavengerWidth > sx && sx > x1 - scavengerWidth && y1 + scavengerWidth > sy && sy > y1 - scavengerWidth) {
       eaten1 = true;
     }
-    if (dead2 && x2 + scavengerWidth > sx && sx > x2 - scavengerWidth && y2 + scavengerWidth > sx && sx > y2 - scavengerWidth) {
+    if (dead2 && x2 + scavengerWidth > sx && sx > x2 - scavengerWidth && y2 + scavengerWidth > sy && sy > y2 - scavengerWidth) {
       eaten2 = true;
     } 
-    if (dead3 && x3 + scavengerWidth > sx && sx > x3 - scavengerWidth && y3 + scavengerWidth > sx && sx > y3 - scavengerWidth) {
+    if (dead3 && x3 + scavengerWidth > sx && sx > x3 - scavengerWidth && y3 + scavengerWidth > sy && sy > y3 - scavengerWidth) {
       eaten3 = true;
     } 
-    if (dead4 && x4 + scavengerWidth > sx && sx > x4 - scavengerWidth && y4 + scavengerWidth > sx && sx > y4 - scavengerWidth) {
+    if (dead4 && x4 + scavengerWidth > sx && sx > x4 - scavengerWidth && y4 + scavengerWidth > sy && sy > y4 - scavengerWidth) {
       eaten4 = true;
     } 
-    if (dead5 && x5 + scavengerWidth > sx && sx > x5 - scavengerWidth && y5 + scavengerWidth > sx && sx > y5 - scavengerWidth) {
+    if (dead5 && x5 + scavengerWidth > sx && sx > x5 - scavengerWidth && y5 + scavengerWidth > sy && sy > y5 - scavengerWidth) {
       eaten5 = true;
     } 
-    if (dead6 && x6 + scavengerWidth > sx && sx > x6 - scavengerWidth && y6 + scavengerWidth > sx && sx > y6 - scavengerWidth) {
+    if (dead6 && x6 + scavengerWidth > sx && sx > x6 - scavengerWidth && y6 + scavengerWidth > sy && sy > y6 - scavengerWidth) {
       eaten6 = true;
     }
 
@@ -295,6 +321,9 @@ class bird {
   }
 
   void movebird1() {
+    if(x1 == predatorX && y1 == predatorY){
+      dead1 = true;
+    }
     if (!dead1) {
       x1 = leaderX;
       y1 = leaderY;
@@ -311,6 +340,9 @@ class bird {
 
 
   void movebird2() {
+    if(x2 == predatorX && y2 == predatorY){
+      dead2 = true;
+    }
     if (dead2) {
       y2++;
       if (y2 >= height) {
@@ -335,63 +367,74 @@ class bird {
       } else {
         y2++;
       }
-    }
+    } else {
 
-    if ((0 <= distX && distX <= 10) && (distY < 0 && distY > -10)) {
-      if (Math.abs(distX) > Math.abs(distY)) {
-        x2++;
+      if ((0 <= distX && distX <= 10) && (distY < 0 && distY > -10)) {
+        if (Math.abs(distX) > Math.abs(distY)) {
+          x2++;
+        } else {
+          y2++;
+        }
       } else {
-        y2++;
+        if ((distX < 0 && distX > -10) && (distY < 0 && distY > -10)) {
+          if (distX < distY) {
+            x2++;
+          } else {
+            y2++;
+          }
+        } else {
+          if ((distX < 0 && distX > -10) && (0 <= distY && distY < 10)) {
+            if (Math.abs(distX) < Math.abs(distY)) {
+              x2++;
+            } else {
+              y2++;
+            }
+          } else {
+            if (distX > 10 && distY > 10) {
+              x2--;
+              y2--;
+            } else {
+              if (distX > 10 && distY > -10 && distY < 10) {
+                x2--;
+              } else {
+                if (distX > 10 && distY < -10) {
+                  x2--;
+                  y2++;
+                } else {
+                  if (distX < 10 && distX > -10 && distY < -10) {
+                    y2++;
+                  } else { 
+                    if (distX < -10 && distY < -10) {
+                      x2++;
+                      y2++;
+                    } else {
+                      if (distX < -10 && distY > -10 && distY < 10) {
+                        x2++;
+                      } else {
+                        if (distX < -10 && distY > 10) {
+                          x2++;
+                          y2--;
+                        } else {
+                          if (distY > 10 && distX < 10 && distX > -10 ) {
+                            y2--;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    }
-
-    if ((distX < 0 && distX > -10) && (distY < 0 && distY > -10)) {
-      if (distX < distY) {
-        x2++;
-      } else {
-        y2++;
-      }
-    }
-
-    if ((distX < 0 && distX > -10) && (0 <= distY && distY < 10)) {
-      if (Math.abs(distX) < Math.abs(distY)) {
-        x2++;
-      } else {
-        y2++;
-      }
-    }
-
-    if (distX > 10 && distY > 10) {
-      x2--;
-      y2--;
-    }
-    if (distX > 10 && distY > -10 && distY < 10) {
-      x2--;
-    }
-    if (distX > 10 && distY < -10) {
-      x2--;
-      y2++;
-    }
-    if (distX < 10 && distX > -10 && distY < -10) {
-      y2++;
-    }
-    if (distX < -10 && distY < -10) {
-      x2++;
-      y2++;
-    }
-    if (distX < -10 && distY > -10 && distY < 10) {
-      x2++;
-    }
-    if (distX < -10 && distY > 10) {
-      x2++;
-      y2--;
-    }
-    if (distY > 10 && distX < 10 && distX > -10 ) {
-      y2--;
     }
   }
 
   void movebird3() {
+    if(x3 == predatorX && y3 == predatorY){
+      dead3 = true;
+    }
     if (dead3) {
       y3++;
       if (y3 >= height) {
@@ -413,95 +456,82 @@ class bird {
         y3 = leaderY;
       }
     }
-    float distX;
-    float distY;
-    boolean plusX = false;
-    boolean plusY = false;
-    distX = x3 - leader3X;
-    distY = y3 - leader3Y;
+    float distX = x3 - leader3X;
+    float distY = y3 - leader3Y;
     if ((0 <= distX && distX <= 10) && (0 <= distY && distY < 10)) {
       if (distX > distY) {
         x3++;
-        plusX = true;
       } else {
         y3++;
-        plusY = true;
       }
-    }
+    } else {
 
-    if ((0 <= distX && distX <= 10) && (distY < 0 && distY > -10)) {
-      if (Math.abs(distX) > Math.abs(distY)) {
-        x3++;
-        plusX = true;
+      if ((0 <= distX && distX <= 10) && (distY < 0 && distY > -10)) {
+        if (Math.abs(distX) > Math.abs(distY)) {
+          x3++;
+        } else {
+          y3++;
+        }
       } else {
-        y3++;
-        plusY = true;
+        if ((distX < 0 && distX > -10) && (distY < 0 && distY > -10)) {
+          if (distX < distY) {
+            x3++;
+          } else {
+            y3++;
+          }
+        } else {
+          if ((distX < 0 && distX > -10) && (0 <= distY && distY < 10)) {
+            if (Math.abs(distX) < Math.abs(distY)) {
+              x3++;
+            } else {
+              y3++;
+            }
+          } else {
+            if (distX > 10 && distY > 10) {
+              x3--;
+              y3--;
+            } else {
+              if (distX > 10 && distY > -10 && distY < 10) {
+                x3--;
+              } else {
+                if (distX > 10 && distY < -10) {
+                  x3--;
+                  y3++;
+                } else {
+                  if (distX < 10 && distX > -10 && distY < -10) {
+                    y3++;
+                  } else { 
+                    if (distX < -10 && distY < -10) {
+                      x3++;
+                      y3++;
+                    } else {
+                      if (distX < -10 && distY > -10 && distY < 10) {
+                        x3++;
+                      } else {
+                        if (distX < -10 && distY > 10) {
+                          x3++;
+                          y3--;
+                        } else {
+                          if (distY > 10 && distX < 10 && distX > -10 ) {
+                            y3--;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    }
-
-    if ((distX < 0 && distX > -10) && (distY < 0 && distY > -10)) {
-      if (distX < distY) {
-        x3++;
-        plusX = true;
-      } else {
-        y3++;
-        plusY = true;
-      }
-    }
-
-    if ((distX < 0 && distX > -10) && (0 <= distY && distY < 10)) {
-      if (Math.abs(distX) < Math.abs(distY)) {
-        x3++;
-        plusX = true;
-      } else {
-        y3++;
-        plusY = true;
-      }
-    }
-
-    if (distX > 10 && distY > 10) {
-      x3--;
-      plusX = false;
-      y3--;
-      plusY = false;
-    }
-    if (distX > 10 && distY > -10 && distY < 10) {
-      x3--;
-      plusX = false;
-    }
-    if (distX > 10 && distY < -10) {
-      x3--;
-      plusX = false;
-      y3++;
-      plusY = true;
-    }
-    if (distX < 10 && distX > -10 && distY < -10) {
-      y3++;
-      plusY = true;
-    }
-    if (distX < -10 && distY < -10) {
-      x3++;
-      plusX = true;
-      y3++;
-      plusY = true;
-    }
-    if (distX < -10 && distY > -10 && distY < 10) {
-      x3++;
-      plusX = true;
-    }
-    if (distX < -10 && distY > 10) {
-      x3++;
-      plusX = true;
-      y3--;
-      plusY = false;
-    }
-    if (distY > 10 && distX < 10 && distX > -10 ) {
-      y3--;
-      plusY = false;
     }
   }
 
   void movebird4() {
+    if(x4 == predatorX && y4 == predatorY){
+      dead4 = true;
+    }
     if (dead4) {
       y4++;
       if (y4 >= height) {
@@ -528,73 +558,82 @@ class bird {
         }
       }
     }
-    float distX;
-    float distY;
-    distX = x4 - leader4X;
-    distY = y4 - leader4Y;
+    float distX = x4 - leader4X;
+    float distY = y4 - leader4Y;
     if ((0 <= distX && distX <= 10) && (0 <= distY && distY < 10)) {
       if (distX > distY) {
         x4++;
       } else {
         y4++;
       }
-    }
+    } else {
 
-    if ((0 <= distX && distX <= 10) && (distY < 0 && distY > -10)) {
-      if (Math.abs(distX) > Math.abs(distY)) {
-        x4++;
+      if ((0 <= distX && distX <= 10) && (distY < 0 && distY > -10)) {
+        if (Math.abs(distX) > Math.abs(distY)) {
+          x4++;
+        } else {
+          y4++;
+        }
       } else {
-        y4++;
+        if ((distX < 0 && distX > -10) && (distY < 0 && distY > -10)) {
+          if (distX < distY) {
+            x4++;
+          } else {
+            y4++;
+          }
+        } else {
+          if ((distX < 0 && distX > -10) && (0 <= distY && distY < 10)) {
+            if (Math.abs(distX) < Math.abs(distY)) {
+              x4++;
+            } else {
+              y4++;
+            }
+          } else {
+            if (distX > 10 && distY > 10) {
+              x4--;
+              y4--;
+            } else {
+              if (distX > 10 && distY > -10 && distY < 10) {
+                x4--;
+              } else {
+                if (distX > 10 && distY < -10) {
+                  x4--;
+                  y4++;
+                } else {
+                  if (distX < 10 && distX > -10 && distY < -10) {
+                    y4++;
+                  } else { 
+                    if (distX < -10 && distY < -10) {
+                      x4++;
+                      y4++;
+                    } else {
+                      if (distX < -10 && distY > -10 && distY < 10) {
+                        x4++;
+                      } else {
+                        if (distX < -10 && distY > 10) {
+                          x4++;
+                          y4--;
+                        } else {
+                          if (distY > 10 && distX < 10 && distX > -10 ) {
+                            y4--;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    }
-
-    if ((distX < 0 && distX > -10) && (distY < 0 && distY > -10)) {
-      if (distX < distY) {
-        x4++;
-      } else {
-        y4++;
-      }
-    }
-
-    if ((distX < 0 && distX > -10) && (0 <= distY && distY < 10)) {
-      if (Math.abs(distX) < Math.abs(distY)) {
-        x4++;
-      } else {
-        y4++;
-      }
-    }
-
-    if (distX > 10 && distY > 10) {
-      x4--;
-      y4--;
-    }
-    if (distX > 10 && distY > -10 && distY < 10) {
-      x4--;
-    }
-    if (distX > 10 && distY < -10) {
-      x4--;
-      y4++;
-    }
-    if (distX < 10 && distX > -10 && distY < -10) {
-      y4++;
-    }
-    if (distX < -10 && distY < -10) {
-      x4++;
-      y4++;
-    }
-    if (distX < -10 && distY > -10 && distY < 10) {
-      x4++;
-    }
-    if (distX < -10 && distY > 10) {
-      x4++;
-      y4--;
-    }
-    if (distY > 10 && distX < 10 && distX > -10 ) {
-      y4--;
     }
   }
 
   void movebird5() {
+    if(x5 == predatorX && y5 == predatorY){
+      dead5 = true;
+    }
     if (dead5) {
       y5++;
       if (y5 >= height) {
@@ -633,63 +672,74 @@ class bird {
       } else {
         y5++;
       }
-    }
+    } else {
 
-    if ((0 <= distX && distX <= 10) && (distY < 0 && distY > -10)) {
-      if (Math.abs(distX) > Math.abs(distY)) {
-        x5++;
+      if ((0 <= distX && distX <= 10) && (distY < 0 && distY > -10)) {
+        if (Math.abs(distX) > Math.abs(distY)) {
+          x5++;
+        } else {
+          y5++;
+        }
       } else {
-        y5++;
+        if ((distX < 0 && distX > -10) && (distY < 0 && distY > -10)) {
+          if (distX < distY) {
+            x5++;
+          } else {
+            y5++;
+          }
+        } else {
+          if ((distX < 0 && distX > -10) && (0 <= distY && distY < 10)) {
+            if (Math.abs(distX) < Math.abs(distY)) {
+              x5++;
+            } else {
+              y5++;
+            }
+          } else {
+            if (distX > 10 && distY > 10) {
+              x5--;
+              y5--;
+            } else {
+              if (distX > 10 && distY > -10 && distY < 10) {
+                x5--;
+              } else {
+                if (distX > 10 && distY < -10) {
+                  x5--;
+                  y5++;
+                } else {
+                  if (distX < 10 && distX > -10 && distY < -10) {
+                    y5++;
+                  } else { 
+                    if (distX < -10 && distY < -10) {
+                      x5++;
+                      y5++;
+                    } else {
+                      if (distX < -10 && distY > -10 && distY < 10) {
+                        x5++;
+                      } else {
+                        if (distX < -10 && distY > 10) {
+                          x5++;
+                          y5--;
+                        } else {
+                          if (distY > 10 && distX < 10 && distX > -10 ) {
+                            y5--;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    }
-
-    if ((distX < 0 && distX > -10) && (distY < 0 && distY > -10)) {
-      if (distX < distY) {
-        x5++;
-      } else {
-        y5++;
-      }
-    }
-
-    if ((distX < 0 && distX > -10) && (0 <= distY && distY < 10)) {
-      if (Math.abs(distX) < Math.abs(distY)) {
-        x5++;
-      } else {
-        y5++;
-      }
-    }
-
-    if (distX > 10 && distY > 10) {
-      x5--;
-      y5--;
-    }
-    if (distX > 10 && distY > -10 && distY < 10) {
-      x5--;
-    }
-    if (distX > 10 && distY < -10) {
-      x5--;
-      y5++;
-    }
-    if (distX < 10 && distX > -10 && distY < -10) {
-      y5++;
-    }
-    if (distX < -10 && distY < -10) {
-      x5++;
-      y5++;
-    }
-    if (distX < -10 && distY > -10 && distY < 10) {
-      x5++;
-    }
-    if (distX < -10 && distY > 10) {
-      x5++;
-      y5--;
-    }
-    if (distY > 10 && distX < 10 && distX > -10 ) {
-      y5--;
     }
   }
 
   void movebird6() {
+    if(x6 == predatorX && y6 == predatorY){
+      dead6 = true;
+    }
     if (dead6) {
       y6++;
       if (y6 >= height) {
@@ -734,72 +784,149 @@ class bird {
       } else {
         y6++;
       }
-    }
+    } else {
 
-    if ((0 <= distX && distX <= 10) && (distY < 0 && distY > -10)) {
-      if (Math.abs(distX) > Math.abs(distY)) {
-        x6++;
+      if ((0 <= distX && distX <= 10) && (distY < 0 && distY > -10)) {
+        if (Math.abs(distX) > Math.abs(distY)) {
+          x6++;
+        } else {
+          y6++;
+        }
       } else {
-        y6++;
+        if ((distX < 0 && distX > -10) && (distY < 0 && distY > -10)) {
+          if (distX < distY) {
+            x6++;
+          } else {
+            y6++;
+          }
+        } else {
+          if ((distX < 0 && distX > -10) && (0 <= distY && distY < 10)) {
+            if (Math.abs(distX) < Math.abs(distY)) {
+              x6++;
+            } else {
+              y6++;
+            }
+          } else {
+            if (distX > 10 && distY > 10) {
+              x6--;
+              y6--;
+            } else {
+              if (distX > 10 && distY > -10 && distY < 10) {
+                x6--;
+              } else {
+                if (distX > 10 && distY < -10) {
+                  x6--;
+                  y6++;
+                } else {
+                  if (distX < 10 && distX > -10 && distY < -10) {
+                    y6++;
+                  } else { 
+                    if (distX < -10 && distY < -10) {
+                      x6++;
+                      y6++;
+                    } else {
+                      if (distX < -10 && distY > -10 && distY < 10) {
+                        x6++;
+                      } else {
+                        if (distX < -10 && distY > 10) {
+                          x6++;
+                          y6--;
+                        } else {
+                          if (distY > 10 && distX < 10 && distX > -10 ) {
+                            y6--;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    }
-
-    if ((distX < 0 && distX > -10) && (distY < 0 && distY > -10)) {
-      if (distX < distY) {
-        x6++;
-      } else {
-        y6++;
-      }
-    }
-
-    if ((distX < 0 && distX > -10) && (0 <= distY && distY < 10)) {
-      if (Math.abs(distX) < Math.abs(distY)) {
-        x6++;
-      } else {
-        y6++;
-      }
-    }
-
-    if (distX > 10 && distY > 10) {
-      x6--;
-      y6--;
-    }
-    if (distX > 10 && distY > -10 && distY < 10) {
-      x6--;
-    }
-    if (distX > 10 && distY < -10) {
-      x6--;
-      y6++;
-    }
-    if (distX < 10 && distX > -10 && distY < -10) {
-      y6++;
-    }
-    if (distX < -10 && distY < -10) {
-      x6++;
-      y6++;
-    }
-    if (distX < -10 && distY > -10 && distY < 10) {
-      x6++;
-    }
-    if (distX < -10 && distY > 10) {
-      x6++;
-      y6--;
-    }
-    if (distY > 10 && distX < 10 && distX > -10 ) {
-      y6--;
     }
   }
 
 
 
   float birdX() {
-    return x1;
+    return leaderX;
   }
 
   float birdY() {
+    return leaderY;
+  }
+  
+  float bird1X(){
+    return x1;
+  }
+  
+  float bird1Y(){
     return y1;
   }
-
-  void movebird() {
+  
+  float bird2X(){
+    return x2;
+  }
+  
+  float bird2Y(){
+    return y2;
+  }
+  
+  float bird3X(){
+    return x3;
+  }
+  
+  float bird3Y(){
+    return y3;
+  }
+  
+  float bird4X(){
+    return x4;
+  }
+  
+  float bird4Y(){
+    return y4;
+  }
+  
+  float bird5X(){
+    return x5;
+  }
+  
+  float bird5Y(){
+    return y5;
+  }
+  
+  float bird6X(){
+    return x6;
+  }
+  
+  float bird6Y(){
+    return y6;
+  }
+  
+  boolean bird1dead(){
+    return dead1;
+  }
+  
+  boolean bird2dead(){
+    return dead2;
+  }
+  
+  boolean bird3dead(){
+    return dead3;
+  }
+  
+  boolean bird4dead(){
+    return dead4;
+  }
+  
+  boolean bird5dead(){
+    return dead5;
+  }
+  
+  boolean bird6dead(){
+    return dead6;
   }
 }
