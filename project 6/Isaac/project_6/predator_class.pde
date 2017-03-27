@@ -2,18 +2,26 @@ class predator{
   
   int birdX, birdY;
   int x, y = 0;
-  float t, vel, accel;
+  float t, vel;
+  float accel = .01;
+  boolean stop = false;
+  int timer = 200;
+  PShape img_hawk;
+
+  
+  void setup(){
+    //img_hawk = loadShape("vulture.svg");
+  }
   
   void drawPredator(){
     changePredPos();
     ellipse(x, y, 20, 20);
-    
+    //shape(img_hawk,100,100,50,50);    
   }
   
-  void changeTimeStuff(float t, float vel, float accel){
+  void changeTimeStuff(float t){
     this.t = t; 
-    this.vel = vel;
-    this.accel = accel;
+    this.vel += accel;
   }
   
   void changeBirdPos(int x, int y){
@@ -22,10 +30,38 @@ class predator{
   }
   
   void changePredPos(){
-    if(this.t % 30 == 0){
-      this.x = this.birdX;
-      this.y = this.birdY;
+    int xDiff = birdX - x;
+    int yDiff = birdY - y;
+    
+    if(this.stop == false){
+      if(xDiff < 0){
+        x -= vel;
+      }
+      if(xDiff > 0){
+        x += vel; 
+      }
+      if(yDiff < 0){
+        y -= vel; 
+      }
+      if(yDiff > 0){
+        y += vel; 
+      }
     }
+    
+    if(birdX == x){
+      this.vel = 0; 
+      this.stop = true;
+    }
+    
+    if(this.stop == true){
+      timer -= 1;
+      if(timer == 0){
+        this.stop = false;
+        timer = 200;
+      }
+      
+    }
+   
     
   }
   

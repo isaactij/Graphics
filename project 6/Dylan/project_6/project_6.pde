@@ -27,7 +27,7 @@ void draw(){
   
   //predator stuff
   predator.changeBirdPos(int(b1.birdX()), int(b1.birdY()));
-  predator.changeTimeStuff(this.t, this.vel, this.accel);
+  predator.changeTimeStuff(this.t);
   predator.drawPredator();
   
   

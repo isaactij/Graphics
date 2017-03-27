@@ -2,8 +2,10 @@ class predator{
   
   int birdX, birdY;
   int x, y = 0;
-  float t, vel, accel;
-  int target_x, target_y;
+  float t, vel;
+  float accel = .004;
+  boolean stop = false;
+  int timer = 200;
   
   void drawPredator(){
     changePredPos();
@@ -11,10 +13,9 @@ class predator{
     
   }
   
-  void changeTimeStuff(float t, float vel, float accel){
+  void changeTimeStuff(float t){
     this.t = t; 
-    this.vel = vel;
-    this.accel = accel;
+    this.vel += accel;
   }
   
   void changeBirdPos(int x, int y){
@@ -23,12 +24,40 @@ class predator{
   }
   
   void changePredPos(){
-    if(this.t % 100 == 0){
-      this.target_x = birdX;
-      this.target_y = birdY;
+    int xDiff = birdX - x;
+    int yDiff = birdY - y;
+    
+    if(this.stop == false){
+      if(xDiff < 0){
+        x -= vel;
+      }
+      if(xDiff > 0){
+        x += vel; 
+      }
+      if(yDiff < 0){
+        y -= vel; 
+      }
+      if(yDiff > 0){
+        y += vel; 
+      }
     }
-    this.x = floor(lerp(x, target_x, 0.2));
-    this.y = floor(lerp(y, target_y, 0.2));
+    
+    if(birdX == x){
+      this.vel = 0; 
+      this.stop = true;
+    }
+    
+    if(this.stop == true){
+      timer -= 1;
+      if(timer == 0){
+        this.stop = false;
+        timer = 200;
+      }
+      
+    }
+    
+
+
 
     
     

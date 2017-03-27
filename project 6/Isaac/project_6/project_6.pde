@@ -16,6 +16,7 @@ void setup(){
 }
 
 void draw(){ //<>//
+  this.t += 1;
   background(255);
   b1.drawbirds();
   b1.movebirds(predator.xPos(), predator.yPos());
@@ -28,7 +29,7 @@ void draw(){ //<>//
   
   //predator stuff
   predator.changeBirdPos(int(b1.birdX()), int(b1.birdY()));
-  predator.changeTimeStuff(this.t, this.vel, this.accel);
+  predator.changeTimeStuff(this.t);
   predator.drawPredator();
 }
   
