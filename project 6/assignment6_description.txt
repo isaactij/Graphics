@@ -1,0 +1,9 @@
+This intended simulation depicts a flock of birds as they attempt to avoid a hawk predator and a vulture scavenger that eats up dead birds after they have been eaten by the predator.
+
+The predator class observes the birds, then accelerates towards, and eats, a bird.
+
+The scavenger collects, or eats, the dead birds as they are falling to the ground. In between 'feedings' the vulture stays to the side and waits. 
+
+In this project, we were able to finish all the of the objectives we planned in the progress report. 
+
+Isaac was responsible for the birds, Dylan for the predator, and Anand for the scavenger. This project was different in that it required us to integrate our parts more closely than before, so we had to periodically check each others progress to update our own parts. 
