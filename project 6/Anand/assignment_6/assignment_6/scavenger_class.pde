@@ -63,20 +63,25 @@ class scavenger{
       this.y = y1;//lerp(y, y1, .7);}
   }
     if (dead2 == true){
-      this.x = lerp(x, x2, .7);
-      this.y = lerp(y, y2, .7);}
+      this.x = x2;//lerp(x, x2, .7);
+      this.y = y2;//lerp(y, y2, .7);}
+}
     if (dead3 == true){
-      this.x = lerp(x, x3, .7);
-      this.y = lerp(y, y3, .7);} 
+      this.x = x3;//lerp(x, x3, .7);
+      this.y = y4;//lerp(y, y3, .7);} 
+      }
     if (dead4 == true){
-      this.x = lerp(x, x4, .7);
-      this.y = lerp(y, y4, .7);}
+      this.x = x4;//lerp(x, x4, .7);
+      this.y = y4;//lerp(y, y4, .7);}
+      }
     if (dead5 == true){
-      this.x = lerp(x, x5, .7);
-      this.y = lerp(y, y5, .7);}
+      this.x = x5;//lerp(x, x5, .7);
+      this.y = y5;//lerp(y, y5, .7);}
+      }
     if (dead6 == true){
-      this.x = lerp(x, x6, .7);
-      this.y = lerp(y, y6, .7);}
+      this.x = x6;//lerp(x, x6, .7);
+      this.y = y6;//lerp(y, y6, .7);}
+      }
   }
     
     
