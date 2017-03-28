@@ -6,10 +6,14 @@ class predator {
   float accel = .004;
   boolean stop = false;
   int timer = 200;
+  
+   void setup(){
+     img_hawk = loadShape("falc.svg");
+   }
 
   void drawPredator() {
     changePredPos();
-    ellipse(x, y, 20, 20);
+    shape(img_hawk,x,y,60,60);    
   }
 
   void changeTimeStuff(float t) {
@@ -42,7 +46,6 @@ class predator {
     }
 
     if (birdX == x && birdY == y) {
-      this.vel = 0; 
       this.stop = true;
     }
 
@@ -51,6 +54,7 @@ class predator {
       if (timer == 0) {
         this.stop = false;
         timer = 200;
+        this.vel = 0;
       }
     }
   }

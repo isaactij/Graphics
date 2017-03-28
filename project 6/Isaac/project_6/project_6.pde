@@ -3,6 +3,7 @@ scavenger vulture;
 PShape img_vulture;
 predator predator;
 int t, vel, accel = 0;
+PShape img_hawk;
 
 
 void setup() {
@@ -12,6 +13,7 @@ void setup() {
   b1 = new bird();
   vulture = new scavenger();
   img_vulture = loadShape("vulture.svg");
+  img_hawk = loadShape("falc.svg");
   predator = new predator();
 }
 
