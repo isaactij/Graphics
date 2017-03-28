@@ -20,7 +20,7 @@ void draw(){
   this.t +=1;
   background(255);
   b1.drawbirds();
-  b1.movebirds(predator.xPos(), predator.yPos());
+  b1.movebirds(predator.xPos(), predator.yPos(), predator.predatorStop());
   shapeMode(CENTER);
   vulture.display();
   //print(vulture.x() + " \n");

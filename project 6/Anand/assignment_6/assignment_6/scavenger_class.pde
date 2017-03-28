@@ -30,7 +30,7 @@ class scavenger{
     
   scavenger(){
     x = 40;
-    lerpy = y;
+    y = 40;
     sizeX = 25;
     sizeY = 25;}
     
@@ -45,21 +45,23 @@ class scavenger{
   void display(){
 
     fill(0);
-    if (i < 1){
-      lerpy = lerp(10, 400, i);
-      shape(img_vulture, x, lerpy, sizeX, sizeY);
+    if (y < 500){
+      //lerpy = lerp(10, 400, i);
+      shape(img_vulture, x, y, sizeX, sizeY);
       
-      i += .001;}
+      y += 1;}
     else{
-      i = .1;
-      shape(img_vulture, x, lerpy, sizeX, sizeY);
+      //i = .1;
+      //shape(img_vulture, x, y, sizeX, sizeY);
+      y = 40; 
         }  
   }
   
   void eatBird (boolean dead1, boolean dead2, boolean dead3, boolean dead4, boolean dead5, boolean dead6, float x1, float x2, float x3, float x4, float x5, float x6, float y1, float y2, float y3, float y4, float y5, float y6 ){
     if (dead1 == true){
-      this.x = lerp(x, x1, .7);
-      this.y = lerp(y, y1, .7);}
+      this.x = x1;// lerp(x, x1, .7);
+      this.y = y1;//lerp(y, y1, .7);}
+  }
     if (dead2 == true){
       this.x = lerp(x, x2, .7);
       this.y = lerp(y, y2, .7);}

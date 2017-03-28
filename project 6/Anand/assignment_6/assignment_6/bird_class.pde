@@ -57,23 +57,28 @@ class bird {
   float predatorX;
   float predatorY;  
   int predatorCount;
-  float predatorLastX;
-  float predatorLastY;
+
+  float oldLeaderX;
+  float oldLeaderY;
+
+  int stopCount;
 
 
   bird() {
-    x1 = 50;
-    y1 = 50;
-    x2 = 155;
-    y2 = 50;
-    x3 = 60;
-    y3 = 50;
-    x4 = 65;
-    y4 = 50;
-    x5 = 70;
-    y5 = 50;
-    x6 = 75;
-    y6 = 50;
+    oldLeaderX = 50;
+    oldLeaderY = 50;
+    x1 = 250;
+    y1 = 250;
+    x2 = 250;
+    y2 = 250;
+    x3 = 250;
+    y3 = 250;
+    x4 = 250;
+    y4 = 250;
+    x5 = 250;
+    y5 = 250;
+    x6 = 250;
+    y6 = 250;
 
     x = mouseX;
     y = mouseY;
@@ -127,10 +132,12 @@ class bird {
     leader5eaten = false;
     leader6eaten = false;
 
-    eatenCountMax = 100;
+    eatenCountMax = 600;
 
     predatorX = 200;
     predatorY = 50;
+
+    stopCount = 0;
   }
 
   void drawbirds() {
@@ -160,12 +167,23 @@ class bird {
       //shape(b, x6, y6);
     }
 
-    text("P", predatorX, predatorY);
+    //text("P", predatorX, predatorY);
   }
 
-  void movebirds(float predX, float predY) {    
-    predatorY = predX;
-    predatorX = predY;
+  void movebirds(float predX, float predY, boolean stopped) {
+    if (stopped && stopCount == 1) {
+      stopCount = 0;
+      predatorX = -500;
+      predatorY = -500;
+    } else {
+      if (stopped) {
+        stopCount++;
+      }
+      predatorX = predX;
+      predatorY = predY;
+    }
+    println(predX+"X");
+    println(predY+"Y");
     if (leaderX - 100 < predatorX && predatorX < leaderX + 100 && leaderY - 100 < predatorY && predatorY < leaderY +100) {
       if (leaderX > predatorX) {
         backx = false;
@@ -185,22 +203,26 @@ class bird {
     if (leaderY == 500) {
       backy = true;
     }
-    if (leaderX == 0) {
+    if (leaderX == 10) {
       backx = false;
     }
-    if (leaderY == 0) {
+    if (leaderY == 10) {
       backy = false;
     }
-    
-    
+
+
     if (!backx) {
+      oldLeaderX = leaderX;
       leaderX++;
     } else { 
+      oldLeaderX = leaderX;
       leaderX--;
     }
     if (!backy) {
+      oldLeaderY = leaderY;
       leaderY++;
     } else {
+      oldLeaderY = leaderY;
       leaderY--;
     }
 
@@ -224,10 +246,12 @@ class bird {
     if (!eaten6) {
       movebird6();
     }
+    //println(leaderX + "x");
+    //println(leaderY + "y");
   }
 
   void ifDead(float sx, float sy) {
-    int scavengerWidth = 200;
+    int scavengerWidth = 30;
     if (dead1 && x1 + scavengerWidth > sx && sx > x1 - scavengerWidth && y1 + scavengerWidth > sy && sy > y1 - scavengerWidth) {
       eaten1 = true;
     }
@@ -250,10 +274,13 @@ class bird {
 
     if (eaten1) {
       if (eatenCount1 == eatenCountMax) {
+        eatenCount1 = 0;
         dead1 = false;
         eaten1 = false;
         x1 = 50;
         y1 = 50;
+        leaderX = x1;
+        leaderY = y1;
       } else {
         eatenCount1++;
       }
@@ -262,6 +289,7 @@ class bird {
 
     if (eaten2) {
       if (eatenCount2 == eatenCountMax) {
+        eatenCount2 = 0;
         dead2 = false;
         eaten2 = false;
         x2 = 50;
@@ -274,6 +302,7 @@ class bird {
 
     if (eaten3) {
       if (eatenCount3 == eatenCountMax) {
+        eatenCount3 = 0;
         dead3 = false;
         eaten3 = false;
         x3 = 50;
@@ -286,6 +315,7 @@ class bird {
 
     if (eaten4) {
       if (eatenCount4 == eatenCountMax) {
+        eatenCount4 = 0;
         dead4 = false;
         eaten4 = false;
         x4 = 50;
@@ -298,6 +328,7 @@ class bird {
 
     if (eaten5) {
       if (eatenCount5 == eatenCountMax) {
+        eatenCount5 = 0;
         dead5 = false;
         eaten5 = false;
         x5 = 50;
@@ -310,6 +341,7 @@ class bird {
 
     if (eaten6) {
       if (eatenCount6 == eatenCountMax) {
+        eatenCount6 = 0;
         dead6 = false;
         eaten6 = false;
         x6 = 50;
@@ -321,7 +353,7 @@ class bird {
   }
 
   void movebird1() {
-    if(x1 == predatorX && y1 == predatorY){
+    if (x1 == predatorX && y1 == predatorY) {
       dead1 = true;
     }
     if (!dead1) {
@@ -329,7 +361,7 @@ class bird {
       y1 = leaderY;
     } else {
       y1++;
-      if (y1 >= height) {
+      if (y1 >= 500) {
         eaten1 = true;
         x1 = 50;
         y1 = 50;
@@ -340,12 +372,12 @@ class bird {
 
 
   void movebird2() {
-    if(x2 == predatorX && y2 == predatorY){
+    if (x2 == predatorX && y2 == predatorY && dead1) {
       dead2 = true;
     }
     if (dead2) {
       y2++;
-      if (y2 >= height) {
+      if (y2 >= 500) {
         eaten2 = true;
         x2 = 50;
         y2 = 50;
@@ -432,12 +464,12 @@ class bird {
   }
 
   void movebird3() {
-    if(x3 == predatorX && y3 == predatorY){
+    if (x3 == predatorX && y3 == predatorY && dead1 && dead2) {
       dead3 = true;
     }
     if (dead3) {
       y3++;
-      if (y3 >= height) {
+      if (y3 >= 500) {
         eaten3 = true;
         x3 = 50;
         y3 = 50;
@@ -529,12 +561,12 @@ class bird {
   }
 
   void movebird4() {
-    if(x4 == predatorX && y4 == predatorY){
+    if (x4 == predatorX && y4 == predatorY && dead1 && dead2 && dead3) {
       dead4 = true;
     }
     if (dead4) {
       y4++;
-      if (y4 >= height) {
+      if (y4 >= 500) {
         eaten4 = true;
         x4 = 50;
         y4 = 50;
@@ -631,12 +663,12 @@ class bird {
   }
 
   void movebird5() {
-    if(x5 == predatorX && y5 == predatorY){
+    if (x5 == predatorX && y5 == predatorY && dead1 && dead2 && dead3 && dead4) {
       dead5 = true;
     }
     if (dead5) {
       y5++;
-      if (y5 >= height) {
+      if (y5 >= 500) {
         eaten5 = true;
         x5 = 50;
         y5 = 50;
@@ -737,12 +769,12 @@ class bird {
   }
 
   void movebird6() {
-    if(x6 == predatorX && y6 == predatorY){
+    if (x6 == predatorX && y6 == predatorY && dead1 && dead2 && dead3 && dead4 && dead5) {
       dead6 = true;
     }
     if (dead6) {
       y6++;
-      if (y6 >= height) {
+      if (y6 >= 500) {
         eaten6 = true;
         x6 = 50;
         y6 = 50;
@@ -857,76 +889,76 @@ class bird {
   float birdY() {
     return leaderY;
   }
-  
-  float bird1X(){
+
+  float bird1X() {
     return x1;
   }
-  
-  float bird1Y(){
+
+  float bird1Y() {
     return y1;
   }
-  
-  float bird2X(){
+
+  float bird2X() {
     return x2;
   }
-  
-  float bird2Y(){
+
+  float bird2Y() {
     return y2;
   }
-  
-  float bird3X(){
+
+  float bird3X() {
     return x3;
   }
-  
-  float bird3Y(){
+
+  float bird3Y() {
     return y3;
   }
-  
-  float bird4X(){
+
+  float bird4X() {
     return x4;
   }
-  
-  float bird4Y(){
+
+  float bird4Y() {
     return y4;
   }
-  
-  float bird5X(){
+
+  float bird5X() {
     return x5;
   }
-  
-  float bird5Y(){
+
+  float bird5Y() {
     return y5;
   }
-  
-  float bird6X(){
+
+  float bird6X() {
     return x6;
   }
-  
-  float bird6Y(){
+
+  float bird6Y() {
     return y6;
   }
-  
-  boolean bird1dead(){
+
+  boolean bird1dead() {
     return dead1;
   }
-  
-  boolean bird2dead(){
+
+  boolean bird2dead() {
     return dead2;
   }
-  
-  boolean bird3dead(){
+
+  boolean bird3dead() {
     return dead3;
   }
-  
-  boolean bird4dead(){
+
+  boolean bird4dead() {
     return dead4;
   }
-  
-  boolean bird5dead(){
+
+  boolean bird5dead() {
     return dead5;
   }
-  
-  boolean bird6dead(){
+
+  boolean bird6dead() {
     return dead6;
   }
 }
