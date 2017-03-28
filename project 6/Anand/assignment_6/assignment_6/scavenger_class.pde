@@ -29,24 +29,18 @@ class scavenger{
     img_vulture = loadShape("vulture.svg");}
     
   scavenger(){
-    x = 20;
-    y = 50;
+    x = 40;
+    lerpy = y;
     sizeX = 25;
     sizeY = 25;}
     
-  float x(float predX){
-    if (predX < width/2){
-      return (predX - dist);}
-    else {
-      return (predX + dist);}
-    }
+  float x(){
+    return this.x;}
+    
       
-  float y(float predY){
-    if (predY < height/2){
-      return (predY - dist);}
-    else {
-      return (predY + dist);}
-    }
+  float y(){
+    return this.lerpy;}
+    
     
   void display(){
 
