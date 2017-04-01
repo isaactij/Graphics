@@ -42,7 +42,7 @@ class scavenger {
 
 
   float y() {
-    return this.lerpy;
+    return this.y;
   }
 
 
