@@ -1,0 +1,11 @@
+pacman controls
+score
+interface that shows lives, score (number of pellets eaten * 100??), and time
+victory/defeat screen
+
+pellets - get rid of shaking
+-- large array of field, 1 where pellet supposed to be, 0 when pacman goes over it
+
+dylan = user controls and death screen
+isaac = pellets and pacman movement
+anand = user interface and calculating lives
