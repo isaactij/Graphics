@@ -6,10 +6,13 @@ int pellet_animator = 0;
 SoundFile file;
 int points;
 boolean up, down, left, right;
+int lives = 3, time = 0;
+PImage logo;
 
 void setup() {
   size(1000, 500, P2D);
   background(0);
+  logo = loadImage("header.gif");
   pac = new pacman();
   gh = new ghost();
   pellets = new pellet();
@@ -19,12 +22,23 @@ void setup() {
   down = false;
   left = false;
   right = false;
-  //file.loop();
+  file.loop();
 }
 
 void draw() {
+  time += 1;
   pellet_animator += 1;
   background(0);
+  image(logo, 475, 0);
+  fill(255);
+  textSize(32);
+  text("Lives: ", 500, 250);
+  text(lives, 600, 250);
+  text("Time: ", 500, 300);
+  text(time / 60, 600, 300);
+  text("Points: ", 500, 350);
+  text(points, 620, 350);
+  fill(0);
   pellets.display(pac.x(), pac.y());
   println(pellets.point());
   gh.display();
@@ -37,6 +51,7 @@ void draw() {
     pac = new pacman();
     gh = new ghost();
     pellets = new pellet();
+    
   }
   gh.display();
   gh.move();  
@@ -45,6 +60,8 @@ void draw() {
     pac = new pacman();
     gh = new ghost();
     pellets = new pellet();
+    lives -= 1;
+    time = 0;
   }
   maze();
 }
