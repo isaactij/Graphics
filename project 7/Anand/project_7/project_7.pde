@@ -4,10 +4,12 @@ ghost gh;
 pellet pellets;
 int pellet_animator = 0;
 SoundFile file;
-int points;
 boolean up, down, left, right;
 int lives = 3, time = 0;
 PImage logo;
+int sec;
+int min;
+int sub;
 
 void setup() {
   size(1000, 500, P2D);
@@ -17,12 +19,15 @@ void setup() {
   gh = new ghost();
   pellets = new pellet();
   file = new SoundFile(this, "sound.wav");
-  points = 0;
   up = false;
   down = false;
   left = false;
   right = false;
   file.loop();
+  
+  sec = 0;
+  min = 0;
+  sub = 0;
 }
 
 void draw() {
@@ -35,9 +40,16 @@ void draw() {
   text("Lives: ", 500, 250);
   text(lives, 600, 250);
   text("Time: ", 500, 300);
-  text(time / 60, 600, 300);
+  sec = int(millis() / 1000) - sub;
+  if(sec == 60){
+    min++;
+    sub += 60;
+    
+  }
+  //text(time / 60, 600, 300);
+  text(min + ": " + sec, 600, 300);
   text("Points: ", 500, 350);
-  text(points, 620, 350);
+  text(pellets.point() * 100, 620, 350);
   fill(0);
   pellets.display(pac.x(), pac.y());
   println(pellets.point());
@@ -45,12 +57,14 @@ void draw() {
   gh.move();
   pac.display();
   //pac.autoMove();
-  pac.manualMove(false, false, false, false); //<>//
+  pac.manualMove(false, false, true, false); //<>//
   // to reset game
-  if (pac.x() == gh.x() && pac.y() == gh.y()) {
+  //if (pac.x() == gh.x() && pac.y() == gh.y()) {
+    if(pac.x() + 10 > gh.x() && pac.x() - 10 < gh.x() && pac.y() + 10 > gh.y() && pac.y() - 10 < gh.y()){
     pac = new pacman();
     gh = new ghost();
     pellets = new pellet();
+    lives--;
     
   }
   gh.display();
