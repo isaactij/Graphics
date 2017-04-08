@@ -57,7 +57,7 @@ void draw() {
   gh.move();
   pac.display();
   //pac.autoMove();
-  pac.manualMove(false, false, true, false); //<>//
+  pac.manualMove(false, false, false, false); //<>//
   // to reset game
   //if (pac.x() == gh.x() && pac.y() == gh.y()) {
     if(pac.x() + 10 > gh.x() && pac.x() - 10 < gh.x() && pac.y() + 10 > gh.y() && pac.y() - 10 < gh.y()){
