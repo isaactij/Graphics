@@ -6,6 +6,7 @@ class pellet {
 
 
   pellet() {
+    stroke(255);
     pelletShape = createShape(RECT, 0, 0, 4, 4);
     totPoints = 0;
     writePositions();

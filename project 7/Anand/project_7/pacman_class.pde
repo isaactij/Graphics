@@ -290,6 +290,38 @@ class pacman {
     }
   }
 
+  boolean leftCheck() {
+    if (path[int((x - 0.5) * 10)][int(y * 10)] == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  boolean rightCheck() {
+    if (path[int((x + 0.5) * 10)][int(y * 10)] == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  boolean upCheck() {
+    if (path[int(x * 10)][int((y - 0.5) * 10)] == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  boolean downCheck() {
+    if (path[int(x * 10)][int((y + 0.5) * 10)] == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   void manualMove(boolean userUp, boolean userDown, boolean userLeft, boolean userRight) {
     ////check last step left
     //if(((x -= 0.5) == 32.5) && (y == 232.5) && lastStep == 1){
@@ -333,16 +365,16 @@ class pacman {
 
     if (left == true && right == true && up == true && down == true) {
       if (userLeft) {
-        x--;
+        x -= 0.5;
       } else {
         if (userRight) {
-          x++;
+          x += 0.5;
         } else {
           if (userUp) {
-            y--;
+            y -= 0.5;
           } else {
             if (userDown) {
-              y++;
+              y += 0.5;
             }
           }
         }
@@ -350,132 +382,132 @@ class pacman {
     }
     if (left == false && right == true && up == true && down == true) {
       if (userRight) {
-        x++;
+        x += 0.5;
       } else {
         if (userUp) {
-          y--;
+          y -= 0.5;
         } else {
           if (userDown) {
-            y++;
+            y += 0.5;
           }
         }
       }
     }
     if (left == true && right == false && up == true && down == true) {
       if (userLeft) {
-        x--;
+        x -= 0.5;
       } else {
         if (userUp) {
-          y--;
+          y -= 0.5;
         } else {
           if (userDown) {
-            y++;
+            y += 0.5;
           }
         }
       }
     }
     if (left == true && right == true && up == false && down == true) {
-      if(userLeft){
-        x--;
-      }else{
-        if(userRight){
-          x++;
-        }else{
-            if(userDown){
-              y++;
-            }
+      if (userLeft) {
+        x -= 0.5;
+      } else {
+        if (userRight) {
+          x += 0.5;
+        } else {
+          if (userDown) {
+            y += 0.5;
           }
         }
+      }
     }
     if (left == true && right == true && up == true && down == false) {
-      if(userLeft){
-        x--;
-      }else{
-        if(userRight){
-          x++;
-        }else{
-          if(userUp){
-            y--;
+      if (userLeft) {
+        x -= 0.5;
+      } else {
+        if (userRight) {
+          x += 0.5;
+        } else {
+          if (userUp) {
+            y -= 0.5;
           }
         }
       }
     }
     if (left == false && right == false && up == true && down == true) {
-      
-          if(userUp){
-            y--;
-          }else{
-            if(userDown){
-              y++;
-            }
-          }
+
+      if (userUp) {
+        y -= 0.5;
+      } else {
+        if (userDown) {
+          y += 0.5;
+        }
+      }
     }
     if (left == true && right == false && up == false && down == true) {
-     if(userLeft){
-        x--;
-      }else{
-            if(userDown){
-              y++;
-            }
+      if (userLeft) {
+        x -= 0.5;
+      } else {
+        if (userDown) {
+          y += 0.5;
+        }
       }
     }
     if (left == true && right == true && up == false && down == false) {
-      if(userLeft){
-        x--;
-      }else{
-        if(userRight){
-          x++;
+      if (userLeft) {
+        x -= 0.5;
+      } else {
+        if (userRight) {
+          x += 0.5;
         }
       }
     }
     if (left == false && right == true && up == true && down == false) {
-      
-        if(userRight){
-          x++;
-        }else{
-          if(userUp){
-            y--;
-          }
+
+      if (userRight) {
+        x += 0.5;
+      } else {
+        if (userUp) {
+          y -= 0.5;
+        }
       }
     }
     if (left == false && right == true && up == false && down == true) {
-      
-        if(userRight){
-          x++;
-        }else{
-            if(userDown){
-              y++;
-            }
-          }
+
+      if (userRight) {
+        x += 0.5;
+      } else {
+        if (userDown) {
+          y += 0.5;
+        }
+      }
     }
     if (left == true && right == false && up == true && down == false) {
-      if(userLeft){
-        x--;
-      }else{
-          if(userUp){
-            y--;
-          }
+      if (userLeft) {
+        x -= 0.5;
+      } else {
+        if (userUp) {
+          y -= 0.5;
+        }
       }
     }
     if (left == false && right == false && up == false && down == true) {
-      if(userDown){
-        y++;
+      if (userDown) {
+        y += 0.5;
       }
     }
     if (left == true && right == false && up == false && down == false) {
-      if(userLeft){
-        x--;
+      if (userLeft) {
+        x -= 0.5;
       }
     }
     if (left == false && right == true && up == false && down == false) {
-      if(userRight){
-        x++;
+      if (userRight) {
+        x += 0.5;
       }
     }
     if (left == false && right == false && up == true && down == false) {
-     if(userUp){
-       y--;
-     }
+      if (userUp) {
+        y -= 0.5;
+      }
     }
     mouth();
   }

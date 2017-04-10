@@ -1,15 +1,20 @@
-//import processing.sound.*; //<>// //<>// //<>//
+import processing.sound.*; //<>// //<>// //<>// //<>// //<>// //<>//
 pacman pac;
 ghost gh;
 pellet pellets;
 int pellet_animator = 0;
 boolean up, down, left, right;
-int lives = 3, time = 0;
+int lives, time;
 PImage logo;
 PImage over;
-int sec;
-int min;
-int sub;
+int sec = 0;
+int min = 0;
+int sub = 0;
+SoundFile munch;
+SoundFile death;
+boolean start;
+boolean pause;
+boolean once;
 
 void setup() {
   size(1000, 500, P2D);
@@ -19,124 +24,168 @@ void setup() {
   pac = new pacman();
   gh = new ghost();
   pellets = new pellet();
-  //file = new SoundFile(this, "sound.wav");
+  munch = new SoundFile(this, "sound.wav");
+  death = new SoundFile(this, "pacman_death.wav");
+  munch.rate(0.5);
+  death.rate(0.5);
+  munch.loop();
   up = false;
   down = false;
   left = false;
   right = false;
-  //file.loop();
-  
-  sec = 0;
-  min = 0;
-  sub = 0;
+  start = false;
+  pause = false;
+  lives = 1;
+  time = 0;
+  once = true;
 }
 
 void draw() {
-  time += 1;
-  pellet_animator += 1;
-  background(0);
-  image(logo, 475, 0);
-  fill(255);
-  textSize(32);
-  text("Lives: ", 500, 250);
-  text(lives, 600, 250);
-  text("Time: ", 500, 300);
-  sec = int(millis() / 1000) - sub;
-  if(sec == 60){
-    min++;
-    sub += 60;
-    
-  }
-  //text(time / 60, 600, 300);
-  text(min + ": " + sec, 600, 300);
-  text("Points: ", 500, 350);
-  text(pellets.point() * 100, 620, 350);
-  fill(0);
-  pellets.display(pac.x(), pac.y());
-  println(pellets.point());
-  gh.display();
-  gh.move();
-  pac.display();
-  //pac.autoMove();
-  pac.manualMove(false, false, false, false); //<>//
-  
-  
-  rect(725, 400, 55, 55);
-  rect(780,400,55,55);
-  rect(780,345,55,55);
-  rect(835,400,55,55);
-  fill(0,0,0);
-  text("a", 740, 435);
-  text("s", 795, 435);
-  text("w", 795, 380);
-  text("d", 850, 435);
-  
-  if (keyPressed == true)
-  {
-    if (key == 'a'){
-      fill(0,0,255);
-      rect(725, 400, 55, 55);
-      fill(249, 250, 23);
-      text("a", 740, 435);
-      pac.manualMove(false, false, true, false);
+  if (!start) {
+    textSize(30);
+    text("PRESS B TO BEGIN", 350, 250);  
+    image(logo, 250, 300);
+    if (keyPressed == true) {
+      if (key == 'b' || key == 'B') {
+        start = true;
+      }
     }
-    if ( key == 'w'){
-      fill(0,0,255);
-      rect(780,345,55,55);
-      fill(249, 250, 23);
-      text("w", 795, 380);
-      pac.manualMove(true, false, false, false);
+  } else {
+    if(pause){
+      fill(0);
+      noStroke();
+      rect(250, 215, 600, 50);
+      fill(255);
+      text("PRESS C TO CONTINUE OR Q TO QUIT", 250, 250);
+      if(keyPressed == true){
+        if(key == 'c' || key == 'C'){
+          pause = false;
+        }
+        if(key == 'q' || key == 'Q'){
+          munch.stop();
+          setup();
+        }
+      }
+    }else{
+    time += 1;
+    pellet_animator += 1;
+    background(0);
+    image(logo, 475, 0);
+    fill(255);
+    textSize(32);
+    text("Lives: ", 500, 250);
+    text(lives, 600, 250);
+    text("Time: ", 500, 300);
+    text("PRESS P TO PAUSE", 500, 500);
+    sec = int(millis() / 1000) - sub;
+    if (sec == 60) {
+      min++;
+      sub += 60;
     }
-    if ( key == 's'){
-      fill(0,0,255);
-      rect(780,400,55,55);
+    //text(time / 60, 600, 300);
+    text(min + ": " + sec, 600, 300);
+    text("Points: ", 500, 350);
+    text(pellets.point() * 100, 620, 350);
+    fill(0);
+    pellets.display(pac.x(), pac.y());
+    //println(pellets.point());
+    gh.display();
+    gh.move();
+    pac.display();
+    //pac.autoMove();
+    pac.manualMove(up, down, left, right);
+
+
+    rect(725, 400, 55, 55);
+    rect(780, 400, 55, 55);
+    rect(780, 345, 55, 55);
+    rect(835, 400, 55, 55);
+    fill(0, 0, 0);
+    text("a", 740, 435);
+    text("s", 795, 435);
+    text("w", 795, 380);
+    text("d", 850, 435);
+
+    if (keyPressed == true) {
+      if(key == 'p' || key == 'P'){
+        pause = true;
+      }
+      if (key == 'a' || key == 'A') {
+        fill(0, 0, 255);
+        rect(725, 400, 55, 55);
+        fill(249, 250, 23);
+        text("a", 740, 435);
+        //pac.manualMove(false, false, true, false);
+        if (pac.leftCheck()) {
+          left = true;
+          up = false;
+          down = false;
+          right = false;
+        }
+        //println(left);
+        //  println(pac.x() + "-" + pac.y());
+      }
+      if ( key == 'w' || key == 'W') {
+        fill(0, 0, 255);
+        rect(780, 345, 55, 55);
+        fill(249, 250, 23);
+        text("w", 795, 380);
+        //pac.manualMove(true, false, false, false);
+        if (pac.upCheck()) {
+          up = true;
+          down = false;
+          left = false; 
+          right = false;
+        }
+      }
+      if ( key == 's' || key == 'S') {
+        fill(0, 0, 255);
+        rect(780, 400, 55, 55);
+        fill(249, 250, 23);
+        text("s", 795, 435);
+        //pac.manualMove(false, true, false, false);
+        if (pac.downCheck()) {
+          down = true;
+          up = false;
+          left = false;
+          right = false;
+        }
+      }
+      if ( key == 'd' || key == 'D') {
+        fill(0, 0, 255);
+        rect(835, 400, 55, 55);  
+        fill(249, 250, 23);
+        text("d", 850, 435);
+        //pac.manualMove(false, false, false, true);
+        if (pac.rightCheck()) {
+          right = true;
+          up = false;
+          down = false;
+          left = false;
+        }
+      }
+
       fill(249, 250, 23);
-      text("s", 795, 435);
-      pac.manualMove(false, true, false, false); 
     }
-    if ( key == 'd'){
-      fill(0,0,255);
-      rect(835,400,55,55);  
-      fill(249, 250, 23);
-      text("d", 850, 435);
-      pac.manualMove(false, false, false, true);
+    gh.display();
+    gh.move();  
+    maze();
+    // to reset game
+    //if (pac.x() == gh.x() && pac.y() == gh.y()) {
+    if (pac.x() + 10 > gh.x() && pac.x() - 10 < gh.x() && pac.y() + 10 > gh.y() && pac.y() - 10 < gh.y()) {
+      pac = new pacman();
+      gh = new ghost();
+      pellets = new pellet();
+      lives--;
     }
 
-    fill(249, 250, 23);
 
-    
+    if (lives == 0) {
+      background(0);
+      this.deathScreen();
+    }}
   }
-  // to reset game
-  //if (pac.x() == gh.x() && pac.y() == gh.y()) {
-    if(pac.x() + 10 > gh.x() && pac.x() - 10 < gh.x() && pac.y() + 10 > gh.y() && pac.y() - 10 < gh.y()){
-    pac = new pacman();
-    gh = new ghost();
-    pellets = new pellet();
-    lives--;
-
-    
-  }
-  gh.display();
-  gh.move();  
-  //to reset game
-  if (pac.x() == gh.x() && pac.y() == gh.y()) {
-    pac = new pacman();
-    gh = new ghost();
-    pellets = new pellet();
-    lives -= 1;
-    time = 0;
-  }
-  maze();
-  
-    if (lives == 0){
-     background(0);
-     this.deathScreen(); 
-     noLoop();
-    }
-  
-
 }
-
 
 void maze() {
   mazeEdges();
@@ -186,10 +235,21 @@ void mazeBoxes() {
   //rectMode(CORNER);
 }
 
-void deathScreen(){
-    
-    image(over, 190, 0);
-
+void deathScreen() {
+  if(once){
+    munch.stop();
+  death.play();
+  once = false;
+  }
+  
+  image(over, 190, 0);
+  fill(250);
+  text("PRESS R TO RESTART", 300, 500);
+  if(keyPressed == true){
+    if(key == 'r' || key == 'R'){
+      setup();
+    }
+  }
 }
 
 void mazeThreePiece() {
