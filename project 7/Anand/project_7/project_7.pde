@@ -1,12 +1,12 @@
-import processing.sound.*; //<>// //<>//
+//import processing.sound.*; //<>// //<>// //<>//
 pacman pac;
 ghost gh;
 pellet pellets;
 int pellet_animator = 0;
-SoundFile file;
 boolean up, down, left, right;
 int lives = 3, time = 0;
 PImage logo;
+PImage over;
 int sec;
 int min;
 int sub;
@@ -15,15 +15,16 @@ void setup() {
   size(1000, 500, P2D);
   background(0);
   logo = loadImage("header.gif");
+  over = loadImage("over.jpg");
   pac = new pacman();
   gh = new ghost();
   pellets = new pellet();
-  file = new SoundFile(this, "sound.wav");
+  //file = new SoundFile(this, "sound.wav");
   up = false;
   down = false;
   left = false;
   right = false;
-  file.loop();
+  //file.loop();
   
   sec = 0;
   min = 0;
@@ -58,6 +59,53 @@ void draw() {
   pac.display();
   //pac.autoMove();
   pac.manualMove(false, false, false, false); //<>//
+  
+  
+  rect(725, 400, 55, 55);
+  rect(780,400,55,55);
+  rect(780,345,55,55);
+  rect(835,400,55,55);
+  fill(0,0,0);
+  text("a", 740, 435);
+  text("s", 795, 435);
+  text("w", 795, 380);
+  text("d", 850, 435);
+  
+  if (keyPressed == true)
+  {
+    if (key == 'a'){
+      fill(0,0,255);
+      rect(725, 400, 55, 55);
+      fill(249, 250, 23);
+      text("a", 740, 435);
+      pac.manualMove(false, false, true, false);
+    }
+    if ( key == 'w'){
+      fill(0,0,255);
+      rect(780,345,55,55);
+      fill(249, 250, 23);
+      text("w", 795, 380);
+      pac.manualMove(true, false, false, false);
+    }
+    if ( key == 's'){
+      fill(0,0,255);
+      rect(780,400,55,55);
+      fill(249, 250, 23);
+      text("s", 795, 435);
+      pac.manualMove(false, true, false, false); 
+    }
+    if ( key == 'd'){
+      fill(0,0,255);
+      rect(835,400,55,55);  
+      fill(249, 250, 23);
+      text("d", 850, 435);
+      pac.manualMove(false, false, false, true);
+    }
+
+    fill(249, 250, 23);
+
+    
+  }
   // to reset game
   //if (pac.x() == gh.x() && pac.y() == gh.y()) {
     if(pac.x() + 10 > gh.x() && pac.x() - 10 < gh.x() && pac.y() + 10 > gh.y() && pac.y() - 10 < gh.y()){
@@ -65,6 +113,7 @@ void draw() {
     gh = new ghost();
     pellets = new pellet();
     lives--;
+
     
   }
   gh.display();
@@ -78,7 +127,16 @@ void draw() {
     time = 0;
   }
   maze();
+  
+    if (lives == 0){
+     background(0);
+     this.deathScreen(); 
+     noLoop();
+    }
+  
+
 }
+
 
 void maze() {
   mazeEdges();
@@ -126,6 +184,12 @@ void mazeBoxes() {
   //rectMode(CORNERS);
   //rect(185, 205, 270, 252.5);  
   //rectMode(CORNER);
+}
+
+void deathScreen(){
+    
+    image(over, 190, 0);
+
 }
 
 void mazeThreePiece() {
