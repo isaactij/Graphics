@@ -1,0 +1,16 @@
+For this project we used our project 4 as a base for our project since it was
+an animation of the pac-man game and we added manual controls, lives, a timer,
+a beginning screen, a pause screen and menu, and a death screen with the option
+to restart the game. The pac-man class was done by Isaac, the pellets class was
+done by Dylan, the ghost class was done by Anand, and the main file was done by
+all of us. The game starts with the beginning screen prompting users to press b
+to begin the game. Once this is pressed the game allows the player to press w
+for up, s for down, a for left, and d for right. The objective of the game is to
+collect all the pellets without the ghost getting to you. If the ghost does get
+to the pac-man then the game restarts with one life of 3 deducted. If all three
+lives are lost then the game goes to a death screen where it prompts the user to
+press r to restart the game and if pressed then the game returns to the
+beginning screen. In the game if the user presses p then the game is
+paused and the user is prompted to press c to continue the game or q to quit the
+game. If quit then the game returns to the beginning screen. The score goes up
+by 100 when a pellet is eaten.
