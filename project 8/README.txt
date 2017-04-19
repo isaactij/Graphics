@@ -1,1 +1,0 @@
-For part one, simply open the program and click anywhere on the displayed canvas. Each click will advance the year of the dataset by one year. Once you are at the end of the dataset (year 1960), another click will loop you back to 1949.

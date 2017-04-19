@@ -1,0 +1,12 @@
+Isaac worked on part 3. In this part the data is taken from BBC news. The first
+page is Science and Environment and is color coded yellow. The second page is
+technology and is color coded red. The third page is Entertainments and Arts and
+is color coded white. The fourth page is Business and color coded blue. The fifth
+page is UK Politics and is color coded pink. The default page is the first one
+and when one of the page buttons is pressed the page changes to the one selected.
+The buttons up and down scroll the page up and down to see all of the feed items.
+When the mouse goes over one of the article titles the title changes to green and
+a short description appears on the right side in green. In the program code the
+page group_4_assignment8_part3 is the main page. The class button makes the buttons
+and handles their location, color, and display. The class hover is used to notify
+when the mouse is over an article title.
