@@ -1,12 +1,15 @@
 //initial push
+import processing.sound.*;
 PImage background, brick, test;
-int x = 0, y = 200, px = 0, brick_x, tryX = 0;
+int x = 0, y = 200, px = 0, brick_x, tryX = 0, time;
 int start = 0;
 
 Platform p;
 Mario m;
 float t;
-boolean left, right, up, down, space, shift = false;
+boolean left, right, up, down, space, shift = false, music;
+boolean intro, pause;
+SoundFile theme;
 
 PImage[] leftWalk;
 PImage[] rightWalk;
@@ -22,13 +25,20 @@ boolean lastDirectionRight;
 
 
 void setup() {
-  size(500, 385, P2D);
+  size(500, 450, P2D);
+  theme = new SoundFile(this, "theme.mp3");
+  music = true;
+  if (music == true){
+    theme.loop();}
+  intro = true;
+  pause = false;
   background = loadImage("background.png");
   test = loadImage("banner.png");
   brick = loadImage("brick.jpg");
   brick.resize(30, 30);
   test.resize(500, 385);
   start = 0;
+  time = 0;
   brick_x = 50;
 
   leftWalk = new PImage[4];
@@ -56,7 +66,7 @@ void setup() {
 
 void draw() {
 
-  background(0);
+  background(255);
   pushMatrix();
   translate(px, 0);
   image(background, 0, 0);  
@@ -69,8 +79,12 @@ void draw() {
     image(brick, brick_x, 200);
     brick_x += 31;
   }
+
   popMatrix();
+  if (intro == false){
+    gameplay_screen();}
   //ellipse(100, y, 50, 50);
+  intro = true;
   gui();
 
   if (start > 2) {
@@ -167,10 +181,38 @@ void draw() {
     if (px < -1900) {
       px = -1900;
     }
+    //print("x ", mouseX);
   }
   }
 
-  void gui() {  
+void gameplay_screen(){
+  fill(0);
+  textSize(15);
+  text("Time: ", 10, 400);
+  text(time, 54, 400);
+    if (intro == false){
+      time += 1;}
+  if (keyPressed == true){
+    if (key == 'p' || key == 'P'){
+      pause = true;}
+    else if (key == 'v' || key == 'V'){
+      if (music == true){
+      music = false;}
+      else{music = true;}}}
+  
+  text("Music: ", 10, 420);
+  if (music == true){
+    theme.amp(1);
+    text("ON", 60, 420);}
+  else{
+    theme.amp(0);
+    text("OFF", 60, 420);}
+  
+  
+}
+  
+
+void gui() {  
     if (start == 0) {
       textSize(25);
       image(test, px, 0);
@@ -186,24 +228,45 @@ void draw() {
     if (start == 1) {
       image(background, 0, 0);
       textSize(18);
-      text("This game uses arrow keys to move your Mario character.\nUse the right arrow to move right.\nUse the left arrow to move left.\nUse the up arrow to jump up.\n\nPress N to move to the next slide", 10, 150);
+      text("This game uses arrow keys to move your Mario.\nUse the right arrow to move right.\nUse the left arrow to move left.\nUse the up arrow to jump up.\n\nPress N to move to the next slide", 10, 170);
       if (keyPressed == true) {
         if (key == 'n' || key == 'N') {
           start += 1;
         }
       }
     }  
-    if (start == 2) {
+    else if (start == 2) {
       image(background, 0, 0);
       textSize(18);
       text("Press P to pause the game.\n\nPress V to toggle background volume.\n\nPress SPACE to begin the game.", 10, 200);
       if (keyPressed == true) {
         if (key == ' ') {
           start += 1;
+          intro = false;
         }
       }
+    } // end of start == 2
+    else if (pause == true){
+      theme.amp(0);
+      fill(255);
+      noStroke();
+      rect(0, 0, 500, 385);
+      fill(0);
+      textSize(20);
+      text("Press C to continue.\nPress Q to quit.", 150, 200);
+      time += -1;
+      print(time + " ");
+      if (keyPressed == true){
+        if (key == 'c' || key == 'C'){
+          pause = false;
+          theme.amp(1);}
+        else if (key == 'q' || key == 'Q'){
+          intro = true;
+          setup();}
+        }
+
     }
-  }
+}
 
   //void keyPressed() {
   //  switch (keyCode) {
