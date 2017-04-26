@@ -84,7 +84,6 @@ void draw() {
   if (intro == false){
     gameplay_screen();}
   //ellipse(100, y, 50, 50);
-  intro = true;
   gui();
 
   if (start > 2) {
