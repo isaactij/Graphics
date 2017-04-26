@@ -1,7 +1,10 @@
 //initial push
+Mario m;
 PImage background, brick, test;
 int x = 0, y = 200, px = 0, brick_x, tryX = 0;
 int start = 0;
+boolean left,right,up,down,space,shift = false;
+
 
 
 
@@ -13,6 +16,7 @@ void setup(){
   brick.resize(30, 30);
   test.resize(500, 385);
   start = 0;
+  m = new Mario();
   brick_x = 50;
 }
 
@@ -54,6 +58,7 @@ void gui(){
   
 void draw(){
   background(0);
+  m.update();
   pushMatrix();
   translate(px, 0);
   image(background, 0, 0);  image(background, background.width, 0);  image(background, background.width * 2, 0); image(background, background.width * 3, 0);
@@ -79,4 +84,48 @@ void draw(){
   if (px < -1900){
     px = -1900;}
    print(tryX + " ");
+   m.display();
+}
+
+void keyPressed(){
+  switch (keyCode){
+    case 37://left
+      left = true;
+      break;
+    case 39://right
+      right = true;
+      break;
+    case 38://up
+      up = true;
+      break;
+    case 40://down
+      down = true;
+      break;
+    case 32: //space
+      space = true;
+      break;
+    case 16: //shift
+      shift = true;
+  }
+}
+void keyReleased(){
+    switch (keyCode){
+    case 37://left
+      left = false;
+      break;
+    case 39://right
+      right = false;
+      break;
+    case 38://up
+      up = false;
+      break;
+    case 40://down
+      down = false;
+      break;
+    case 32: //space
+      space = false;
+      break;
+    case 16: //shift
+      shift = false;
+  }
 }
