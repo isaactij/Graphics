@@ -1,4 +1,4 @@
-class Mario{
+class Mario{ //<>//
   
   float w,h,x,y,vx,vy, accelX, accelY, speedLimit, friction, bounce, gravity;
   float jumpForce = -5;
