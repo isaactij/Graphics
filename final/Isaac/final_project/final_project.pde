@@ -186,7 +186,7 @@ void draw() {
     if (start == 1) {
       image(background, 0, 0);
       textSize(18);
-      text("This game uses ASDW to move your Mario character.\nUse the right arrow to move right, the left arrow to move left, and the up arrow to jump up.\n\nPress N to move to the next slide", 10, 200);
+      text("This game uses arrow keys to move your Mario character.\nUse the right arrow to move right.\nUse the left arrow to move left.\nUse the up arrow to jump up.\n\nPress N to move to the next slide", 10, 150);
       if (keyPressed == true) {
         if (key == 'n' || key == 'N') {
           start += 1;
