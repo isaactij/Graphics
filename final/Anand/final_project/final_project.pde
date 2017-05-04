@@ -26,12 +26,12 @@ boolean lastDirectionRight;
 
 void setup() {
   size(500, 450, P2D);
-  theme = new SoundFile(this, "theme.mp3");
+  theme = new SoundFile(this, "theme.mp3"); //anand start
   music = true;
   if (music == true){
     theme.loop();}
   intro = true;
-  pause = false;
+  pause = false; //anand finish
   background = loadImage("background.png");
   test = loadImage("banner.png");
   brick = loadImage("brick.jpg");
@@ -81,10 +81,10 @@ void draw() {
   }
 
   popMatrix();
-  if (intro == false){
+  if (intro == false){ // anand start screen
     gameplay_screen();}
   //ellipse(100, y, 50, 50);
-  gui();
+  gui(); //anand start screen finish
 
   if (start > 2) {
     if (up) {
@@ -184,7 +184,7 @@ void draw() {
   }
   }
 
-void gameplay_screen(){
+void gameplay_screen(){ // anand gameplay screen start
   fill(0);
   textSize(15);
   text("Time: ", 10, 400);
@@ -208,10 +208,10 @@ void gameplay_screen(){
     text("OFF", 60, 420);}
   
   
-}
+} //anand gameplay finish
   
 
-void gui() {  
+void gui() {  //anand gui start
     if (start == 0) {
       textSize(25);
       image(test, px, 0);
@@ -254,18 +254,18 @@ void gui() {
       textSize(20);
       text("Press C to continue.\nPress Q to quit.", 150, 200);
       time += -1;
-      print(time + " ");
       if (keyPressed == true){
         if (key == 'c' || key == 'C'){
           pause = false;
           theme.amp(1);}
         else if (key == 'q' || key == 'Q'){
           intro = true;
+          px = 0;
           setup();}
         }
 
     }
-}
+} //anand gui finish
 
   //void keyPressed() {
   //  switch (keyCode) {
