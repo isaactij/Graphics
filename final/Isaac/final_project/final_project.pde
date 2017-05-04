@@ -8,17 +8,17 @@ Mario m;
 float t;
 boolean left, right, up, down, space, shift = false;
 
-PImage[] leftWalk;
-PImage[] rightWalk;
-int spriteCount;
-boolean backCount;
-PImage[] rightJump;
-PImage[] leftJump;
-int marioX;
-int marioY;
-int marioWidth;
-int marioHeight;
-boolean lastDirectionRight;
+// PImage[] leftWalk;
+// PImage[] rightWalk;
+// int spriteCount;
+// boolean backCount;
+// PImage[] rightJump;
+// PImage[] leftJump;
+// int marioX;
+// int m.y();
+// int m.w();
+// int marioHeight;
+// boolean lastDirectionRight;
 
 
 void setup() {
@@ -31,80 +31,81 @@ void setup() {
   start = 0;
   brick_x = 50;
 
-  leftWalk = new PImage[4];
-  rightWalk = new PImage[4];
-  rightJump = new PImage[4];
-  leftJump = new PImage[4];
-  for (int i = 1; i <= 4; i++) {
-    PImage buff = loadImage("leftWalk" + i + ".png");
-    leftWalk[i - 1] = createImage(buff.width, buff.height, ARGB);
-    for (int j = 0; j < buff.width; j++) {
-      for (int l = 0; l < buff.height; l++) {
-        if (green(buff.pixels[j + l * buff.width]) == 255 && red(buff.pixels[j + l * buff.width]) == 255 && blue(buff.pixels[j + l * buff.width]) == 255) {
-          leftWalk[i - 1].pixels[j + l * leftWalk[i - 1].width] = color(255, 0);
-        } else {
-          leftWalk[i - 1].pixels[j + l * leftWalk[i - 1].width] = color(red(buff.pixels[j + l * buff.width]), green(buff.pixels[j + l * buff.width]), blue(buff.pixels[j + l * buff.width]));
-        }
-      }
-    }
-    leftWalk[i - 1].updatePixels();
+  // leftWalk = new PImage[4];
+  // rightWalk = new PImage[4];
+  // rightJump = new PImage[4];
+  // leftJump = new PImage[4];
+  // for (int i = 1; i <= 4; i++) {
+  //   PImage buff = loadImage("leftWalk" + i + ".png");
+  //   leftWalk[i - 1] = createImage(buff.width, buff.height, ARGB);
+  //   for (int j = 0; j < buff.width; j++) {
+  //     for (int l = 0; l < buff.height; l++) {
+  //       if (green(buff.pixels[j + l * buff.width]) == 255 && red(buff.pixels[j + l * buff.width]) == 255 && blue(buff.pixels[j + l * buff.width]) == 255) {
+  //         leftWalk[i - 1].pixels[j + l * leftWalk[i - 1].width] = color(255, 0);
+  //       } else {
+  //         leftWalk[i - 1].pixels[j + l * leftWalk[i - 1].width] = color(red(buff.pixels[j + l * buff.width]), green(buff.pixels[j + l * buff.width]), blue(buff.pixels[j + l * buff.width]));
+  //       }
+  //     }
+  //   }
+  //   leftWalk[i - 1].updatePixels();
 
-    buff = loadImage("rightWalk" + i + ".png");
-    rightWalk[i-1] = createImage(buff.width, buff.height, ARGB);
-    for (int j = 0; j < buff.width; j++) {
-      for (int l = 0; l < buff.height; l++) {
-        if (green(buff.pixels[j + l * buff.width]) == 255 && red(buff.pixels[j + l * buff.width]) == 255 && blue(buff.pixels[j + l * buff.width]) == 255) {
-          rightWalk[i - 1].pixels[j + l * rightWalk[i - 1].width] = color(255, 0);
-        } else {
-          rightWalk[i - 1].pixels[j + l * rightWalk[i - 1].width] = color(red(buff.pixels[j + l * buff.width]), green(buff.pixels[j + l * buff.width]), blue(buff.pixels[j + l * buff.width]));
-        }
-      }
-    }
-    rightWalk[i - 1].updatePixels();
+  //   buff = loadImage("rightWalk" + i + ".png");
+  //   rightWalk[i-1] = createImage(buff.width, buff.height, ARGB);
+  //   for (int j = 0; j < buff.width; j++) {
+  //     for (int l = 0; l < buff.height; l++) {
+  //       if (green(buff.pixels[j + l * buff.width]) == 255 && red(buff.pixels[j + l * buff.width]) == 255 && blue(buff.pixels[j + l * buff.width]) == 255) {
+  //         rightWalk[i - 1].pixels[j + l * rightWalk[i - 1].width] = color(255, 0);
+  //       } else {
+  //         rightWalk[i - 1].pixels[j + l * rightWalk[i - 1].width] = color(red(buff.pixels[j + l * buff.width]), green(buff.pixels[j + l * buff.width]), blue(buff.pixels[j + l * buff.width]));
+  //       }
+  //     }
+  //   }
+  //   rightWalk[i - 1].updatePixels();
 
 
-    buff = loadImage("rightJump" + i + ".png");
-    rightJump[i-1] = createImage(buff.width, buff.height, ARGB);
-    for (int j = 0; j < buff.width; j++) {
-      for (int l = 0; l < buff.height; l++) {
-        if (green(buff.pixels[j + l * buff.width]) == 255 && red(buff.pixels[j + l * buff.width]) == 255 && blue(buff.pixels[j + l * buff.width]) == 255) {
-          rightJump[i - 1].pixels[j + l * rightJump[i - 1].width] = color(255, 0);
-        } else {
-          rightJump[i - 1].pixels[j + l * rightJump[i - 1].width] = color(red(buff.pixels[j + l * buff.width]), green(buff.pixels[j + l * buff.width]), blue(buff.pixels[j + l * buff.width]));
-        }
-      }
-    }
-    rightJump[i - 1].updatePixels();
+  //   buff = loadImage("rightJump" + i + ".png");
+  //   rightJump[i-1] = createImage(buff.width, buff.height, ARGB);
+  //   for (int j = 0; j < buff.width; j++) {
+  //     for (int l = 0; l < buff.height; l++) {
+  //       if (green(buff.pixels[j + l * buff.width]) == 255 && red(buff.pixels[j + l * buff.width]) == 255 && blue(buff.pixels[j + l * buff.width]) == 255) {
+  //         rightJump[i - 1].pixels[j + l * rightJump[i - 1].width] = color(255, 0);
+  //       } else {
+  //         rightJump[i - 1].pixels[j + l * rightJump[i - 1].width] = color(red(buff.pixels[j + l * buff.width]), green(buff.pixels[j + l * buff.width]), blue(buff.pixels[j + l * buff.width]));
+  //       }
+  //     }
+  //   }
+  //   rightJump[i - 1].updatePixels();
 
-    buff = loadImage("leftJump" + i + ".png");
-    leftJump[i-1] = createImage(buff.width, buff.height, ARGB);
-    for (int j = 0; j < buff.width; j++) {
-      for (int l = 0; l < buff.height; l++) {
-        if (green(buff.pixels[j + l * buff.width]) == 255 && red(buff.pixels[j + l * buff.width]) == 255 && blue(buff.pixels[j + l * buff.width]) == 255) {
-          leftJump[i - 1].pixels[j + l * leftJump[i - 1].width] = color(255, 0);
-        } else {
-          leftJump[i - 1].pixels[j + l * leftJump[i - 1].width] = color(red(buff.pixels[j + l * buff.width]), green(buff.pixels[j + l * buff.width]), blue(buff.pixels[j + l * buff.width]));
-        }
-      }
-    }
-    leftJump[i - 1].updatePixels();
-  }
+  //   buff = loadImage("leftJump" + i + ".png");
+  //   leftJump[i-1] = createImage(buff.width, buff.height, ARGB);
+  //   for (int j = 0; j < buff.width; j++) {
+  //     for (int l = 0; l < buff.height; l++) {
+  //       if (green(buff.pixels[j + l * buff.width]) == 255 && red(buff.pixels[j + l * buff.width]) == 255 && blue(buff.pixels[j + l * buff.width]) == 255) {
+  //         leftJump[i - 1].pixels[j + l * leftJump[i - 1].width] = color(255, 0);
+  //       } else {
+  //         leftJump[i - 1].pixels[j + l * leftJump[i - 1].width] = color(red(buff.pixels[j + l * buff.width]), green(buff.pixels[j + l * buff.width]), blue(buff.pixels[j + l * buff.width]));
+  //       }
+  //     }
+  //   }
+  //   leftJump[i - 1].updatePixels();
+  // }
 
-  
 
-  spriteCount = 0;
-  backCount = false;
-  right = true;
-  up = false;
-  marioX = 250;
-  marioY = 285;
-  marioWidth = 30;
-  marioHeight = 40;
-  lastDirectionRight = true;
+
+  // spriteCount = 0;
+  // backCount = false;
+  // right = true;
+  // up = false;
+  // marioX = 250;
+  // m.y() = 285;
+  // m.w() = 30;
+  // marioHeight = 40;
+  // lastDirectionRight = true;
   frameRate(10);
 
   //int[] temp = {(1), (3), (-1), (-1)};
   p = new platform(750, 200, 4, 2);
+  m = new Mario(30, 40, 250, 285);
 }
 
 
@@ -130,93 +131,101 @@ void draw() {
   p.display(px);
   platformAreaCheck();
   if (start > 2) {
-    if (up) {
-      if (lastDirectionRight) {
-        image(rightJump[spriteCount], marioX, marioY, marioWidth, marioHeight);
-      } else {
-        image(leftJump[spriteCount], marioX, marioY, marioWidth, marioHeight);
-      }
-      if (backCount) {
-        spriteCount--;
-        marioY += 50;
-      } else {
-        spriteCount++;
-        marioY -= 50;
-      }
-      if (spriteCount >= 3) {
-        backCount = true;
-      } else {
-        if (spriteCount <= 0) {
-          backCount = false;
-          up = false;
-        }
-      }
-    } else {
-      if (lastDirectionRight) {
-        image(rightWalk[spriteCount], marioX, marioY, marioWidth, marioHeight);
-      } else {
-        image(leftWalk[spriteCount], marioX, marioY, marioWidth, marioHeight);
-      }
-    }
+    m.display();
+    // if (up) {
+    //   if (lastDirectionRight) {
+    //     image(rightJump[spriteCount], marioX, m.y(), m.w(), marioHeight);
+    //   } else {
+    //     image(leftJump[spriteCount], marioX, m.y(), m.w(), marioHeight);
+    //   }
+    //   if (backCount) {
+    //     spriteCount--;
+    //     m.y() += 50;
+    //   } else {
+    //     spriteCount++;
+    //     m.y() -= 50;
+    //   }
+    //   if (spriteCount >= 3) {
+    //     m.backCount();
+    //   } else {
+    //     if (spriteCount <= 0) {
+    //       backCount = false;
+    //       up = false;
+    //     }
+    //   }
+    // } else {
+    //   if (lastDirectionRight) {
+    //     image(rightWalk[spriteCount], marioX, m.y(), m.w(), marioHeight);
+    //   } else {
+    //     image(leftWalk[spriteCount], marioX, m.y(), m.w(), marioHeight);
+    //   }
+    // }
 
     if (keyPressed == true) {
-      if (keyCode == RIGHT) { //move right
-        if (up && lastDirectionRight) {
-          lastDirectionRight = false;
-        } else {
-          if (!up) {
-            lastDirectionRight = true;
-            tryX += 1;
-            px -= 10;
-            right = true;    
-            if (backCount) {
-              spriteCount--;
-            } else {
-              spriteCount++;
-            }
-            if (spriteCount >= 3) {
-              backCount = true;
-            } else {
-              if (spriteCount <= 0) {
-                backCount = false;
-              }
-            }
-          }
-        }
-      } else if (keyCode == LEFT) { //move left
-        if (up && lastDirectionRight) {
-          lastDirectionRight = true;
-        } else {
-          if (!up) {
-            lastDirectionRight = false;
-            px += 10;
-            right = false;
-            if (backCount) {
-              spriteCount--;
-            } else {
-              spriteCount++;
-            }
-            if (spriteCount >= 3) {
-              backCount = true;
-            } else {
-              if (spriteCount <= 0) {
-                backCount = false;
-              }
-            }
-          }
-        }
+      if (keyCode == RIGHT) {
+        right = true;
+        // if (up && lastDirectionRight) {
+        //   lastDirectionRight = false;
+        // } else {
+        //   if (!up) {
+        //     lastDirectionRight = true;
+        //     tryX += 1;
+        //     px -= 10;
+        //     right = true;    
+        //     if (backCount) {
+        //       spriteCount--;
+        //     } else {
+        //       spriteCount++;
+        //     }
+        //     if (spriteCount >= 3) {
+        //       m.backCount();
+        //     } else {
+        //       if (spriteCount <= 0) {
+        //         backCount = false;
+        //       }
+        //     }
+        //   }
+        // }
+      } else if (keyCode == LEFT) {
+        left = true;
+        // if (up && lastDirectionRight) {
+        //   lastDirectionRight = true;
+        // } else {
+        //   if (!up) {
+        //     lastDirectionRight = false;
+        //     px += 10;
+        //     right = false;
+        //     if (backCount) {
+        //       spriteCount--;
+        //     } else {
+        //       spriteCount++;
+        //     }
+        //     if (spriteCount >= 3) {
+        //       m.backCount();
+        //     } else {
+        //       if (spriteCount <= 0) {
+        //         backCount = false;
+        //       }
+        //     }
+        //   }
+        // }
       } else {
         if (keyCode == UP) {
-          if (!up) {
-            spriteCount = 0;
-            backCount = false;
-          }
           up = true;
-          px += 0;
+          // if (!up) {
+          //   spriteCount = 0;
+          //   backCount = false;
+          // }
+          // up = true;
+          // px += 0;
         }
       }
     }
-    //print(px + " ");
+    px = m.update(up, left, right, px);
+    up = false;
+    left = false;
+    right = false;
+
     if (px > 0) {
       px = 0;
     }
@@ -262,14 +271,14 @@ void gui() {
 }
 
 void platformAreaCheck() {
-  if (p.inArea(marioX, marioY, marioWidth, marioHeight) == 1) {
-    backCount = true;
+  if (p.inArea(m.x(), m.y(), m.w(), m.h()) == 1) {
+    m.backCount();
   } else {
-    if (p.inArea(marioX, marioY, marioWidth, marioHeight) == 2) {
-      backCount = true;
+    if (p.inArea(m.x(), m.y(), m.w(), m.h()) == 2) {
+      m.backCount();
     }
   }
-}
+} //<>//
 
 //void keyPressed() {
 //  switch (keyCode) {
@@ -282,7 +291,7 @@ void platformAreaCheck() {
 //      spriteCount++;
 //    }
 //    if (spriteCount == 3) {
-//      backCount = true;
+//      m.backCount();
 //    } else {
 //      if (spriteCount == 0) {
 //        backCount = false;
@@ -299,7 +308,7 @@ void platformAreaCheck() {
 //      spriteCount++;
 //    }
 //    if (spriteCount == 3) {
-//      backCount = true;
+//      m.backCount();
 //    } else {
 //      if (spriteCount == 0) {
 //        backCount = false;
