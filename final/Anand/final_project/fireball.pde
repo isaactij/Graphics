@@ -19,17 +19,15 @@ class Fireball extends Mario{
     if (toggle == true){
      if (m.lastDirectionRight == true){
       if (i < 1){
-
         lerpx = lerp(m.x(), m.x() + 175, i);
         image(fireball, lerpx, m.y() + 20);
-        i = i + .05;
+        i = i + .05;}
         //print(lerpx + " ");}
       else {
         toggle = false;
         image(fireball, lerpx, m.y() + 20);
-        i = .01;}
-    
-    }
+        i = .01;}    
+        }
    else{
       if (i < 1){
         lerpx = lerp(m.x(), m.x() - 175, i);
@@ -42,11 +40,12 @@ class Fireball extends Mario{
    }
   }
   }
+
   
   float fball_x(){
     return lerpx;}
   
   float fball_y(){
     return (m.y() + 20);}
+
 }
-    

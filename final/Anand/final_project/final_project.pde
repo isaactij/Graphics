@@ -1,14 +1,17 @@
 import processing.sound.*; //<>//
 
 //initial push //<>//
+Table highScore;
+String username = "";
 PImage background, brick, test, fireball;
 int x = 0, y = 200, px = 0, brick_x, tryX = 0, time;
-int start = 0;
+int start = 0, lives, score;
 int fireTimeX, fireTimeY;
 
 platform p;
 Mario m;
 Fireball fball;
+gameOver finish;
 float t;
 boolean left, right, up, down, space, shift = false, music;
 boolean intro, pause, shoot;
@@ -19,6 +22,10 @@ tube tu;
 
 void setup() {
   size(500, 450, P2D);
+  highScore = new Table();
+  highScore.addColumn("Username");
+  highScore.addColumn("Score");
+  finish = new gameOver();
   fireball = loadImage("fireball.png");
   background = loadImage("background.png");
   test = loadImage("banner.png");
@@ -28,6 +35,7 @@ void setup() {
   start = 0;
   time = 0;
   fireTimeX = 0;
+  lives = 3;
   brick_x = 50;
   frameRate(10);
   shoot = false;
@@ -48,7 +56,6 @@ void setup() {
 
 
 void draw() {
-
   background(255);
   pushMatrix();
   translate(px, 0);
@@ -78,6 +85,8 @@ void draw() {
     m.display();
 
     if (keyPressed == true) {
+      if (key == 't'){
+        lives -= 1;}
       if (key == 'f'){
         fball.toggle = true;
         //fball.display();
@@ -120,8 +129,23 @@ void draw() {
     }
     if (px < -1900) {
       px = -1900;
-    }
+    } 
   }
+    if (lives == 0){
+      String a = finish.show();
+      
+      if (finish.isDone() == true){
+        TableRow newRow = highScore.addRow();
+        newRow.setString("Username", a);
+        newRow.setInt("Score", score);
+        saveTable(highScore, "data/highScores.csv");}
+    }
+}
+
+void gameOver(){
+  background(255);
+  fill(0);
+  text(username, 360, 180);
 }
 
 void gameplay_screen() {
@@ -152,6 +176,9 @@ void gameplay_screen() {
     theme.amp(0);
     text("OFF", 60, 420);
   }
+  
+  text("Lives: ", 10, 440);
+  text(lives, 50, 440);
 } 
 
 void gui() {  //anand gui start
