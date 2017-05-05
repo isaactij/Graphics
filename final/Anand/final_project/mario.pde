@@ -12,9 +12,11 @@ class Mario { //<>//
   PImage[] rightWalk;
   PImage[] rightJump;
   PImage[] leftJump;
+  PImage fireball;
 
   Mario() {
-
+    fireball = loadImage("fireball.png");
+    fireball.resize(15, 15);
     w = 50;
     h = 50;
     x = 50; 
@@ -34,6 +36,8 @@ class Mario { //<>//
   }
 
   Mario(int givenW, int givenH, int givenX, int givenY) {
+    fireball = loadImage("fireball.png");
+    fireball.resize(15, 15);
     w = givenW;
     h = givenH;
     x = givenX;
@@ -265,5 +269,9 @@ class Mario { //<>//
     backCount = true;
   }
   
+  void fire(){
+    if (keyPressed == true){
+      if (key == 'f' || key == 'F'){
+        image(fireball, this.x(), this.y() - 50);}}}
   
 }

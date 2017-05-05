@@ -1,15 +1,17 @@
 import processing.sound.*; //<>//
 
 //initial push //<>//
-PImage background, brick, test;
+PImage background, brick, test, fireball;
 int x = 0, y = 200, px = 0, brick_x, tryX = 0, time;
 int start = 0;
+int fireTimeX, fireTimeY;
 
 platform p;
 Mario m;
+Fireball fball;
 float t;
 boolean left, right, up, down, space, shift = false, music;
-boolean intro, pause;
+boolean intro, pause, shoot;
 SoundFile theme;
 
 tube tu;
@@ -17,6 +19,7 @@ tube tu;
 
 void setup() {
   size(500, 450, P2D);
+  fireball = loadImage("fireball.png");
   background = loadImage("background.png");
   test = loadImage("banner.png");
   brick = loadImage("brick.jpg");
@@ -24,8 +27,10 @@ void setup() {
   test.resize(500, 385);
   start = 0;
   time = 0;
+  fireTimeX = 0;
   brick_x = 50;
   frameRate(10);
+  shoot = false;
 
   theme = new SoundFile(this, "theme.mp3");
   music = true;
@@ -38,6 +43,7 @@ void setup() {
   p = new platform(750, 200, 4, 2);
   m = new Mario(30, 40, 250, 285);
   tu = new tube(500);
+  fball = new Fireball();
 }
 
 
@@ -72,6 +78,11 @@ void draw() {
     m.display();
 
     if (keyPressed == true) {
+      if (key == 'f'){
+        fball.toggle = true;
+        //fball.display();
+
+      }
       if (keyCode == RIGHT) {
         right = true;
       } else if (keyCode == LEFT) {
@@ -82,6 +93,9 @@ void draw() {
         }
       }
     }
+    
+    if (fball.toggle == true){
+      fball.display();}
 
     if (tu.inArea(m.x(), m.y(), m.w(), m.h())) {
       if (right) {
@@ -200,7 +214,8 @@ void platformAreaCheck() {
     m.backCount();
   } else {
     if (p.inArea(m.x(), m.y(), m.w(), m.h()) == 2) {
-      m.backCount();
-    }
-  }
-}
+      m.backCount();}}}
+
+void keyReleased(){
+  if (key == 'f'){
+    m.display();}}
