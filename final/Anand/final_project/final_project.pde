@@ -43,7 +43,7 @@ void setup() {
 
 void draw() {
 
-  background(0);
+  background(255);
   pushMatrix();
   translate(px, 0);
   image(background, 0, 0);  
