@@ -1,4 +1,4 @@
-class Mario { //<>//
+class Mario { //<>// //<>//
 
   float w, h, x, y, vx, vy, accelX, accelY, speedLimit, friction, bounce, gravity;
   float jumpForce = -5;
@@ -147,8 +147,8 @@ class Mario { //<>//
     x+=vx;
     y+=vy;
 
-    if (y > 350) {
-      y = 350;
+    if (y > 300) {
+      y = 300;
     }
     return px;
   }
@@ -243,6 +243,15 @@ class Mario { //<>//
       }
       leftJump[i - 1].updatePixels();
     }
+  }
+  
+  boolean inArea(int givenX, int givenY, int givenW, int givenH){
+    if ((givenX < x + w && givenX > x) || (givenX + givenW < x + w && givenX + givenW > x)) {
+      if ((givenY < y + h && y > y) || (givenY + givenH < y + h && givenY + givenH > y)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   int x() {

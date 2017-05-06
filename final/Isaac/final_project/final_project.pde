@@ -1,22 +1,39 @@
-import processing.sound.*; //<>//
+import processing.sound.*; //<>// //<>// //<>//
 
-//initial push //<>//
-PImage background, brick, test;
+//initial push
+Table highScore;
+String username = "";
+PImage background, brick, test, fireball;
 int x = 0, y = 200, px = 0, brick_x, tryX = 0, time;
-int start = 0;
+int start = 0, lives = 3, score;
+int fireTimeX, fireTimeY;
 
-platform p;
+
+platform[] p;
 Mario m;
-float t;
+Fireball fball;
+gameOver finish;
 boolean left, right, up, down, space, shift = false, music;
-boolean intro, pause;
+boolean intro, pause, shoot;
 SoundFile theme;
+mushroom mush;
 
-tube tu;
+//tube t1, t2, t3, t4;
+tube[] t;
 
 
 void setup() {
   size(500, 450, P2D);
+  highScore = new Table();
+  highScore.addColumn("Username");
+  highScore.addColumn("Score");
+  finish = new gameOver();
+  x = 0;
+  y = 200;
+  px = 0;
+  tryX = 0;
+  start = 0;
+  fireball = loadImage("fireball.png");
   background = loadImage("background.png");
   test = loadImage("banner.png");
   brick = loadImage("brick.jpg");
@@ -24,8 +41,10 @@ void setup() {
   test.resize(500, 385);
   start = 0;
   time = 0;
+  fireTimeX = 0;
   brick_x = 50;
   frameRate(10);
+  shoot = false;
 
   theme = new SoundFile(this, "theme.mp3");
   music = true;
@@ -35,14 +54,27 @@ void setup() {
   intro = true;
   pause = false;
 
-  p = new platform(750, 200, 4, 2);
+  p = new platform[17];
+  t = new tube[4];
+  p[0] = new platform(500, 200, 1, 1);
+  p[1] = new platform(640, 200, 5, 3); 
+  p[2] = new platform(720, 100, 1, 1);
+  t[0] = new tube(940);
+  t[1]  = new tube(1105);
+  t[2] = new tube(1270);
+  t[3] = new tube(1535);
+  p[3] = new platform(1700, 200, 1, 1);
+  p[4] = new platform(1840, 200, 3, 2);
+  p[5] = new platform(1920, 100, 8, 4);
+  p[6] = new platform(2440, 100, 4, 2);
+
   m = new Mario(30, 40, 250, 285);
-  tu = new tube(500);
+  mush = new mushroom(500, 300);
+  fball = new Fireball();
 }
 
 
 void draw() {
-
   background(255);
   pushMatrix();
   translate(px, 0);
@@ -62,16 +94,45 @@ void draw() {
   }
   gui();
 
-  p.display(px);
+  p[0].display(px);
+  p[1].display(px);
+  p[2].display(px);
+  p[3].display(px);
+  t[0].display(px);
+  t[1].display(px);
+  t[2].display(px);
+  t[3].display(px);
+  p[4].display(px);
+  p[5].display(px);
+  p[6].display(px);
   platformAreaCheck();
 
-  tu.display(px);
-
-
   if (start > 2) {
-    m.display();
+    if ((mush.x() + px) - (m.x() + px) < 400 && (mush.x() + px) - (m.x() + px) > -400) {
+      mush.move();
+    }
 
+    if (t[1].inArea(mush.x(), mush.y(), mush.w(), mush.h())) {
+      mush.turn();
+    }
+    println(m.x() + "  " + m.y());
+    if (m.inArea(mush.x(), mush.y(), mush.w(), mush.h())) {
+      lives--;
+      println(lives);
+      m = new Mario(30, 40, 250, 285);
+      px = 0;
+      //setup();
+    }
+    m.display();
+    mush.display(px);
     if (keyPressed == true) {
+      if (key == 't') {
+        lives -= 1;
+      }
+      if (key == 'f') {
+        fball.toggle = true;
+        //fball.display();
+      }
       if (keyCode == RIGHT) {
         right = true;
       } else if (keyCode == LEFT) {
@@ -83,7 +144,11 @@ void draw() {
       }
     }
 
-    if (tu.inArea(m.x(), m.y(), m.w(), m.h())) {
+    if (fball.toggle == true) {
+      fball.display();
+    }
+
+    if (t[1].inArea(m.x(), m.y(), m.w(), m.h())) {
       if (right) {
         right = false;
       } else {
@@ -104,10 +169,26 @@ void draw() {
     if (px > 0) {
       px = 0;
     }
-    if (px < -1900) {
-      px = -1900;
+    if (px < -10000) {
+      px = -10000;
     }
   }
+  if (lives == 0) {
+    String a = finish.show();
+
+    if (finish.isDone() == true) {
+      TableRow newRow = highScore.addRow();
+      newRow.setString("Username", a);
+      newRow.setInt("Score", score);
+      saveTable(highScore, "data/highScores.csv");
+    }
+  }
+}
+
+void gameOver() {
+  background(255);
+  fill(0);
+  text(username, 360, 180);
 }
 
 void gameplay_screen() {
@@ -138,6 +219,8 @@ void gameplay_screen() {
     theme.amp(0);
     text("OFF", 60, 420);
   }
+  text("Lives: ", 10, 440);
+  text(lives, 50, 440);
 } 
 
 void gui() {  //anand gui start
@@ -196,11 +279,17 @@ void gui() {  //anand gui start
 }
 
 void platformAreaCheck() {
-  if (p.inArea(m.x(), m.y(), m.w(), m.h()) == 1) {
+  if (p[0].inArea(m.x(), m.y(), m.w(), m.h()) == 1) {
     m.backCount();
   } else {
-    if (p.inArea(m.x(), m.y(), m.w(), m.h()) == 2) {
+    if (p[0].inArea(m.x(), m.y(), m.w(), m.h()) == 2) {
       m.backCount();
     }
+  }
+}
+
+void keyReleased() {
+  if (key == 'f') {
+    m.display();
   }
 }

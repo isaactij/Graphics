@@ -18,12 +18,12 @@ class tube {
 
   void display(int px) {
     fill(33, 234, 65);
-    rect((x - w / 2) + px, y, w, h);
-    rect((x - w / 2) + px - 5, y, w + 10, 35);
+    rect((x) + px, y, w, h);
+    rect((x) + px - 5, y, w + 10, 35);
   }
 
   boolean inArea(int marioX, int marioY, int marioWidth, int marioHeight) {
-    if ((marioX < (x + w / 2) + px && marioX > (x - w / 2) + px) || (marioX + marioWidth < (x + w / 2) + px && marioX + marioWidth > (x - w / 2) + px)) {
+    if ((marioX < (x) + w && marioX > (x)) || (marioX + marioWidth < (x) + w && marioX + marioWidth > (x))) {
       if (marioY > y) {
         return true;
       }
