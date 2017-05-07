@@ -56,8 +56,9 @@ class Mario { //<>// //<>//
   //Returns px to update the map in the main
   int update(boolean givenUp, boolean left, boolean right, int px) {  
     if (givenUp) {
+      if(y == 285){
       vy += -50;
-      friction = 1;
+      friction = 1;}
       //print('x');
       //sprite stuff
       //if (!up) {
@@ -153,8 +154,8 @@ class Mario { //<>// //<>//
     px-=vx;
     y+=vy;
 
-    if (y > 300) {
-      y = 300;
+    if (y > 285) {
+      y = 285;
     }
     return px;
   }
