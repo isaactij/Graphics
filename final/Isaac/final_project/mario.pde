@@ -163,7 +163,7 @@ class Mario { //<>// //<>//
     
   fill(255,0,0);
   rect(x,y,w,h);
-      
+
     
     /*
     if (up) {

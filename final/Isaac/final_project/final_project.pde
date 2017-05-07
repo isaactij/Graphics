@@ -37,8 +37,7 @@ void setup() {
   fireball = loadImage("fireball.png");
   background = loadImage("background.png");
   test = loadImage("banner.png");
-  brick = loadImage("brick.jpg");
-  brick.resize(30, 30);
+  brick = loadImage("brick.jpg");  brick.resize(30, 30);
   test.resize(500, 385);
   start = 0;
   time = 0;
