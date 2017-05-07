@@ -3,6 +3,7 @@ class Mario { //<>// //<>//
   float w, h, x, y, vx, vy, accelX, accelY, speedLimit, friction, bounce, gravity;
   float jumpForce = -5;
   boolean isOnGround;
+  int px;
 
   boolean lastDirectionRight;
   int spriteCount;
@@ -25,12 +26,12 @@ class Mario { //<>// //<>//
     accelY = 0;
     speedLimit = 0;
 
-    spriteCount = 0;
-    backCount = false;
-    right = true;
-    up = false;
+  //  spriteCount = 0;
+  //  backCount = false;
+   // right = true;
+   // up = false;
     lastDirectionRight = true;
-    setUpSprite();
+   // setUpSprite();
   }
 
   Mario(int givenW, int givenH, int givenX, int givenY) {
@@ -44,28 +45,27 @@ class Mario { //<>// //<>//
     accelY = 0;
     speedLimit = 0;
 
-    spriteCount = 0;
-    backCount = false;
-    right = true;
-    up = false;
+ //   spriteCount = 0;
+ //   backCount = false;
+  //  right = true;
+   // up = false;
     lastDirectionRight = true;
-    setUpSprite();
+    //setUpSprite();
   }
 
   //Returns px to update the map in the main
   int update(boolean givenUp, boolean left, boolean right, int px) {  
     if (givenUp) {
-      vy += jumpForce;
+      vy += -50;
       friction = 1;
-      print('x');
-
+      //print('x');
       //sprite stuff
-      if (!up) {
-        spriteCount = 0;
-        backCount = false;
-      }
-      up = true;
-      px += 0;
+      //if (!up) {
+      //  spriteCount = 0;
+     //   backCount = false;
+      //}
+      //up = true;
+     // px += 0;
     }
     if (left) {
       // vx =-5;
@@ -74,6 +74,7 @@ class Mario { //<>// //<>//
       // if(currentFrame <= startLeft){currentFrame=startLeft;}
 
       //sprite stuff
+      /*
       if (up && lastDirectionRight) {
         lastDirectionRight = true;
       } else {
@@ -95,6 +96,8 @@ class Mario { //<>// //<>//
           }
         }
       }
+      */
+      
     }
     if (right) {
       // vx =5;
@@ -102,6 +105,8 @@ class Mario { //<>// //<>//
       friction = 1;
 
       //sprite stuff
+      
+      /*
       if (up && lastDirectionRight) {
         lastDirectionRight = false;
       } else {
@@ -123,6 +128,7 @@ class Mario { //<>// //<>//
           }
         }
       }
+      */
     }
     if (!left&&!right) {
       // vx=0;
@@ -144,7 +150,7 @@ class Mario { //<>// //<>//
     vy += accelY;
     vy += gravity;
     y += vy;
-    x+=vx;
+    px-=vx;
     y+=vy;
 
     if (y > 300) {
@@ -154,6 +160,12 @@ class Mario { //<>// //<>//
   }
 
   void display() {
+    
+  fill(255,0,0);
+  rect(x,y,w,h);
+      
+    
+    /*
     if (up) {
       if (lastDirectionRight) {
         image(rightJump[spriteCount], x, y, w, h);
@@ -182,8 +194,10 @@ class Mario { //<>// //<>//
         image(leftWalk[spriteCount], x, y, w, h);
       }
     }
+    */
   }
 
+  /*
   void setUpSprite() {
     leftWalk = new PImage[4];
     rightWalk = new PImage[4];
@@ -244,6 +258,7 @@ class Mario { //<>// //<>//
       leftJump[i - 1].updatePixels();
     }
   }
+  */
   
   boolean inArea(int givenX, int givenY, int givenW, int givenH){
     if ((givenX < x + w && givenX > x) || (givenX + givenW < x + w && givenX + givenW > x)) {

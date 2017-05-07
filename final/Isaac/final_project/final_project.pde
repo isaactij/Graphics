@@ -7,13 +7,14 @@ PImage background, brick, test, fireball;
 int x = 0, y = 200, px = 0, brick_x, tryX = 0, time;
 int start = 0, lives = 3, score;
 int fireTimeX, fireTimeY;
-
+boolean givenUp;
 
 platform[] p;
 Mario m;
 Fireball fball;
 gameOver finish;
-boolean left, right, up, down, space, shift = false, music;
+boolean left, right, up, down, space, shift = false;
+boolean music = false;
 boolean intro, pause, shoot;
 SoundFile theme;
 mushroom mush;
@@ -133,38 +134,17 @@ void draw() {
         fball.toggle = true;
         //fball.display();
       }
-      if (keyCode == RIGHT) {
-        right = true;
-      } else if (keyCode == LEFT) {
-        left = true;
-      } else {
-        if (keyCode == UP) {
-          up = true;
-        }
-      }
     }
 
     if (fball.toggle == true) {
       fball.display();
     }
 
-    if (t[1].inArea(m.x(), m.y(), m.w(), m.h())) {
-      if (right) {
-        right = false;
-      } else {
-        if (left) {
-          left = false;
-        }
-      }
-      if (up) {
-        up = false;
-      }
-    }
 
     px = m.update(up, left, right, px);
-    up = false;
-    left = false;
-    right = false;
+   // up = false;
+    //left = false;
+   // right = false;
 
     if (px > 0) {
       px = 0;
@@ -183,6 +163,52 @@ void draw() {
       saveTable(highScore, "data/highScores.csv");
     }
   }
+}
+
+void keyPressed(){
+  switch (keyCode){
+    case 37://left
+      left = true;
+      break;
+    case 39://right
+      right = true;
+      break;
+    case 38://up
+      up = true;
+      break;
+    case 40://down
+      down = true;
+      break;
+    case 32: //space
+      space = true;
+      break;
+    case 16: //shift
+      shift = true;
+  }
+}
+void keyReleased(){
+    switch (keyCode){
+    case 37://left
+      left = false;
+      break;
+    case 39://right
+      right = false;
+      break;
+    case 38://up
+      up = false;
+      break;
+    case 40://down
+      down = false;
+      break;
+    case 32: //space
+      space = false;
+      break;
+    case 16: //shift
+      shift = false;
+  }
+    if (key == 'f') {
+    m.display();
+    }
 }
 
 void gameOver() {
@@ -239,7 +265,7 @@ void gui() {  //anand gui start
   if (start == 1) {
     image(background, 0, 0);
     textSize(18);
-    text("This game uses arrow keys to move your Mario.\nUse the right arrow to move right.\nUse the left arrow to move left.\nUse the up arrow to jump up.\n\nPress N to move to the next slide", 10, 170);
+    text("This game uses arrow keys to move your Mario.\nUse the right arrow to move right.\nUse the  arrow to move left.\nUse the up arrow to jump up.\n\nPress N to move to the next slide", 10, 170);
     if (keyPressed == true) {
       if (key == 'n' || key == 'N') {
         start += 1;
@@ -285,11 +311,5 @@ void platformAreaCheck() {
     if (p[0].inArea(m.x(), m.y(), m.w(), m.h()) == 2) {
       m.backCount();
     }
-  }
-}
-
-void keyReleased() {
-  if (key == 'f') {
-    m.display();
   }
 }
