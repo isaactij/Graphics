@@ -1,4 +1,4 @@
-import processing.sound.*; //<>// //<>// //<>//
+//import processing.sound.*; //<>// //<>// //<>//
 
 //initial push
 Table highScore;
@@ -8,6 +8,7 @@ int x = 0, y = 200, px = 0, brick_x, tryX = 0, time;
 int start = 0, lives = 3, score;
 int fireTimeX, fireTimeY;
 boolean givenUp;
+Flag f;
 
 platform[] p;
 Mario m;
@@ -16,7 +17,7 @@ gameOver finish;
 boolean left, right, up, down, space, shift = false;
 boolean music = false;
 boolean intro, pause, shoot;
-SoundFile theme;
+//SoundFile theme;
 mushroom mush;
 
 //tube t1, t2, t3, t4;
@@ -46,10 +47,10 @@ void setup() {
   frameRate(10);
   shoot = false;
 
-  theme = new SoundFile(this, "theme.mp3");
+  //theme = new SoundFile(this, "theme.mp3");
   music = true;
   if (music == true) {
-    theme.loop();
+    //theme.loop();
   }
   intro = true;
   pause = false;
@@ -69,6 +70,7 @@ void setup() {
   p[6] = new platform(2440, 100, 4, 2);
 
   m = new Mario(30, 40, 250, 285);
+  f = new Flag();
   mush = new mushroom(500, 300);
   fball = new Fireball();
 }
@@ -164,6 +166,9 @@ void draw() {
       saveTable(highScore, "data/highScores.csv");
     }
   }
+  f.display(px);
+  
+  print("px:" + px);
 }
 
 void keyPressed(){
@@ -240,10 +245,10 @@ void gameplay_screen() {
 
   text("Music: ", 10, 420);
   if (music == true) {
-    theme.amp(1);
+    //theme.amp(1);
     text("ON", 60, 420);
   } else {
-    theme.amp(0);
+   // theme.amp(0);
     text("OFF", 60, 420);
   }
   text("Lives: ", 10, 440);
@@ -284,7 +289,7 @@ void gui() {  //anand gui start
     }
   } // end of start == 2
   else if (pause == true) {
-    theme.amp(0);
+   // theme.amp(0);
     fill(255);
     noStroke();
     rect(0, 0, 500, 385);
@@ -295,7 +300,7 @@ void gui() {  //anand gui start
     if (keyPressed == true) {
       if (key == 'c' || key == 'C') {
         pause = false;
-        theme.amp(1);
+       // theme.amp(1);
       } else if (key == 'q' || key == 'Q') {
         intro = true;
         px = 0;

@@ -162,6 +162,7 @@ class Mario { //<>// //<>//
     vy += gravity;
     y += vy;
     px-=vx;
+
     y+=vy;
 
     if (y > 285) {
