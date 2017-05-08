@@ -70,7 +70,7 @@ class Mario { //<>// //<>//
     }
     if (left) {
       // vx =-5;
-      accelX = -0.6;
+      accelX = -1;
       friction = 1;
       // if(currentFrame <= startLeft){currentFrame=startLeft;}
 
@@ -102,7 +102,7 @@ class Mario { //<>// //<>//
     }
     if (right) {
       // vx =5;
-      accelX = 0.6;
+      accelX = 1;
       friction = 1;
 
       //sprite stuff
@@ -149,12 +149,12 @@ class Mario { //<>// //<>//
 
     print(vx);
    
-   if(vx < -7){
+   if(vx < -8){
      
-     vx = -7;
+     vx = -8;
    }
-   if(vx > 7){
-     vx = 7;
+   if(vx > 8){
+     vx = 8;
    }
    
     vx += accelX;
