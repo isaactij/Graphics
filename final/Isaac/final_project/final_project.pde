@@ -148,8 +148,8 @@ void draw() {
     if (px > 0) {
       px = 0;
     }
-    if (px < -10000) {
-      px = -10000;
+    if (px < -1900) {
+      px = -1900;
     }
   }
   if (lives == 0) {

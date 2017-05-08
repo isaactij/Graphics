@@ -22,9 +22,7 @@ tube tu;
 
 void setup() {
   size(500, 450, P2D);
-  highScore = new Table();
-  highScore.addColumn("Username");
-  highScore.addColumn("Score");
+  highScore = loadTable("highScores.csv", "header");
   finish = new gameOver();
   fireball = loadImage("fireball.png");
   background = loadImage("background.png");
@@ -131,9 +129,9 @@ void draw() {
       px = -1900;
     } 
   }
-    if (lives == 0){
+    if (lives == 0){  
+      //finish.screen();
       String a = finish.show();
-      
       if (finish.isDone() == true){
         TableRow newRow = highScore.addRow();
         newRow.setString("Username", a);
