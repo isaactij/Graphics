@@ -82,6 +82,8 @@ void draw() {
   image(background, background.width, 0);  
   image(background, background.width * 2, 0); 
   image(background, background.width * 3, 0);
+  image(background, background.width * 4, 0);
+  image(background, background.width * 5, 0);
   image(brick, 50, 200);
   int brick_x = 50;
   for (int i = 0; i < 5; i ++) {
@@ -148,8 +150,8 @@ void draw() {
     if (px > 0) {
       px = 0;
     }
-    if (px < -1900) {
-      px = -1900;
+    if (px < -3100) {
+      px = -3100;
     }
   }
   if (lives == 0) {
@@ -162,6 +164,7 @@ void draw() {
       saveTable(highScore, "data/highScores.csv");
     }
   }
+  print("px " + px);
 }
 
 void keyPressed(){
