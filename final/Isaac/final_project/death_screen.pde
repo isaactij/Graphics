@@ -3,9 +3,11 @@ class gameOver{
   int x, y;
   String username = "";
   boolean isDone;
+  boolean victory;
   
   gameOver(){
-    isDone = false;}
+    isDone = false;
+    victory = false;}
 
 String show() {
   background(255);
@@ -21,8 +23,12 @@ String show() {
       username += key;}}
   fill(0);
   textSize(24);
-  text("enter username in lowercase: ", 10, 50);
-  text(username, 20, 100);
+  
+  if (victory == true){
+  text("Game Over. You have won the game!\nEnter your username in lowercase: ", 10, 50);}
+  else{  text("Game Over. You have lost the game!\nEnter your username in lowercase: ", 10, 50);}
+
+  text(username, 20, 120);
   text("press enter to submit", 20, 150);
   noFill();
   return(username);

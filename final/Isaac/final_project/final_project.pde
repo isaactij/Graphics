@@ -160,7 +160,7 @@ void draw() {
 
   if ((lives == 0) || (end == true)) {
     String a = finish.show();
-
+    if ((end == true) && (lives > 0)){ finish.victory = true;}
     if (finish.isDone() == true) {
       TableRow newRow = highScore.addRow();
       newRow.setString("Username", a);
