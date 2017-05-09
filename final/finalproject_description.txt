@@ -1,0 +1,30 @@
+Project functionality: use arrow keys to dodge and jump past enemies. Other enemies can be shot with fireballs using 'f' in order to kill them. The end flag is the goal, upon which reached, will end the game and grant you the glory of victory. Press 'v' to trigger music and press 'p'to pause.
+
+Classes:
+
+	final_project: This class combines all the other classes and implements them all so that the objects are drawn at the proper times and interact in the proper ways
+
+	death_screen: This class dsiplays the death screen upon death
+
+	fireball: This class draws the fireballs that mario can shoot
+
+	flag: This class draws the flag/victory indicator
+
+	mario: This class implements the proper gravity, acceleration, and velocity physics that allow the main character to move. This class also draws the main cahracter
+
+	mushroom: This class draws the mushroom enemies and makes them move back and forth
+
+	platform: This class displays the background blocks
+
+	tube: This class displays the background tubes
+
+Contributions:
+	
+	Dylan: Implemented the Mario movements physics, Mario movment physics interacting with the camera, and the flag and victory
+
+	Isaac: Implemented Sprites, mushrooms, platform, platform, and tube classes
+
+	Anand: Implemented the mario fireball, camera motion, Victoy condition, background
+
+
+Difficulties: The most difficult things we ran into were camera motion and implementing sprites. These were mostly overcome though through determination
