@@ -8,6 +8,7 @@ int x = 0, y = 200, px = 0, brick_x, tryX = 0, time;
 int start = 0, lives = 3, score;
 int fireTimeX, fireTimeY;
 boolean givenUp;
+boolean end;
 Flag f;
 
 platform[] p;
@@ -46,6 +47,7 @@ void setup() {
   brick_x = 50;
   frameRate(10);
   shoot = false;
+  end = false;
 
   //theme = new SoundFile(this, "theme.mp3");
   music = true;
@@ -130,9 +132,6 @@ void draw() {
     m.display();
     mush.display(px);
     if (keyPressed == true) {
-      if (key == 't') {
-        lives -= 1;
-      }
       if (key == 'f') {
         fball.toggle = true;
         //fball.display();
@@ -152,11 +151,14 @@ void draw() {
     if (px > 0) {
       px = 0;
     }
-    if (px < -3100) {
-      px = -3100;
+    if (px < -2441) {
+      px = -2441;
+      end = true;
     }
   }
-  if (lives == 0) {
+  f.display(px);
+
+  if ((lives == 0) || (end == true)) {
     String a = finish.show();
 
     if (finish.isDone() == true) {
@@ -164,9 +166,12 @@ void draw() {
       newRow.setString("Username", a);
       newRow.setInt("Score", score);
       saveTable(highScore, "data/highScores.csv");
+      intro = true;
+      px = 0;
+      setup();
     }
+
   }
-  f.display(px);
   
   print("px:" + px);
 }
